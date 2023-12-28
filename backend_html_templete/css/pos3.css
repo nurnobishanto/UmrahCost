@@ -1,0 +1,74 @@
+.pos-sidebar .brand-logo{
+  text-align: right;
+  box-shadow: none;
+}
+
+.pos-sidebar.active .brand-logo{
+  text-align: center;
+}
+
+.cus-pos-table table{
+  border: 1px solid #ced4da;;
+  border-radius: 5px;
+  padding: 0 20px 10px;
+}
+
+.cus-pos-table table thead{
+  width: 100%;
+  background-color: #e9ecef;
+}
+
+.pos-total{
+  height: 95vh;
+  background-color: #ffffff;
+}
+
+.pos-total .total-meta-data{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.total-meta-data .single-data{
+  display: inline-block;
+  width: 100%;
+  height: 60px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 60px;
+}
+
+.pos-total-data{
+  padding: 24px 0;
+}
+
+.pos-total-data p,
+.cus-data p{
+  font-size: 15px;
+  display: grid;
+  grid-template-columns: 100px 20px 1fr;
+  margin-bottom: 8px;
+  padding: 8px 24px;
+}
+
+.invoice-data{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.cus-pos-heading{
+  border: 1px solid #e9ecef;
+  margin-bottom: 24px;
+}
+
+.invoice-data p{
+  height: 40px;
+  line-height: 40px;
+  border-left: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+  padding: 0 24px;
+}
+
+.shop-data-wpr{
+  padding: 16px 24px;
+  border-right: 1px solid #e9ecef;
+}

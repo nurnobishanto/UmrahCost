@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- responsive tag -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Invoice</title>
+
+    <!-- Inject:css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome/css/all.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/style.css"> <!-- Template Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .invoice-wpr{
+            width: 40%;
+            margin: 0 auto;
+        }
+
+        .barcode img{
+            width: 100%;
+        }
+
+        .product-data{
+            border: 1px solid #000;
+        }
+
+        td{
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .invoice-body .table>:not(caption)>*>*,
+        .invoice-body tr{
+            border-color: #000 !important;
+        }
+
+        .logo-code{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .invoice-body *{
+            border-color: #000 !important;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <!-- Mian Content -->
+
+    <div class="ams-invoice">
+        <div class="invoice-wpr">
+            <div class="invoice-body">
+                <div class="product-data">
+                    <div class="row">
+                        <div class="col-5 position-relative p-4 text-center border-end">
+                            <img src="./images/barcode-sqr.png" alt="Logo" class="w-100">
+                        </div>
+                        <div class="col-7 ps-0">
+                            <div class="delivery-data p-3 border-bottom">
+                                <h6>Recipient: <span>Md. Monir Hossain</span></h6>
+                                <div class="mt-3">
+                                    <p>Comilla Sadar</p>
+                                    <p>Comilla Sadar Sujanagar</p>
+                                    <p>01278967766</p>
+                                </div>
+                            </div>
+                            <div class="seller-data p-3">
+                                <h6>Shipper Name: Md. Monir Hossain</h6>
+                                <div class="mt-3">
+                                    <p>Phone: 01234567890</p>
+                                    <p>House 48, Road-05, Sector-10, Uttara Dhaka</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-qty px-2 my-3">
+                    <div class="row">
+                        <div class="col-5 border">
+                            <p class="p-2">Item QUantity: 1</p>
+                        </div>
+                        <div class="col-7 border border-start-0">
+                            <p class="p-2">Order Making Date: 22 June 2022</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-data mt-3">
+                    <div class="row">
+                        <div class="col-5 position-relative p-4 text-center">
+                            <img src="./images/logo/shop-logo.png" alt="Logo">
+                            <h6 class="logo-code">BD-PF-API</h6>
+                        </div>
+                        <div class="col-7">
+                            <table class="table table-bordered mb-0">
+                                <tbody>
+                                    <tr><td>Standard</td></tr>
+                                    <tr><td>0.2KG</td></tr>
+                                    <tr><td>Standard</td></tr>
+                                    <tr><td>COD</td></tr>
+                                    <tr><td>BDT <span class="ms-4">319.00</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="barcode barcode-1 mt-3">
+                    <img src="./images/barcode 1.jpg" alt="Barcode">
+                    <p class="text-center py-2"><b>Tracking Number: RPL-01234445676</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Js files -->
+    <script src="js/modernizr-3.5.0.min.js"></script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

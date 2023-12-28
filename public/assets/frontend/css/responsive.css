@@ -1,0 +1,925 @@
+/* Min Width 1400px */
+@media only screen and (min-width:1400px){
+    
+    .flight-list .single-flight .flight-details{
+        flex-wrap: nowrap;
+    }
+
+}
+
+/* Min Width 1200px */
+@media only screen and (min-width:1200px){
+
+    .single-hotel .hotel-price{
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        text-align: right;
+    }
+
+    .single-visa img{
+        margin-right: 8px;
+    }
+    
+}
+
+/* Min Width 992px and Max Width 1199px */
+@media only screen and (min-width:992px) and (max-width:1199px){
+
+    .container{
+        max-width: 95% !important;
+    }
+
+    .hotels-container .hotel-list .single-hotel{
+        grid-template-columns: 1fr;
+    }
+
+    .traveler-quantity button{
+        width: 40px;
+    }
+}
+
+/* Min Width 992px */
+@media only screen and (min-width:992px){
+
+    .filter-toggle{
+        display: none;
+    }
+}
+
+/* Max Width 1399px */
+@media only screen and (max-width:1399px){
+    
+}
+
+/* Max Width 1199px */
+@media only screen and (max-width:1199px){
+
+    .container-right{
+        padding-left: 16px;
+    }
+
+    .download-content input{
+        width: 80%;
+    }
+
+    .app-link-btn{
+        right: 120px;
+    }
+
+    .visa-pricing{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .total-fee span{
+        margin-bottom: 4px;
+    }
+
+    .require-info-toggle{
+        width: max-content;
+    }
+
+}
+
+/* Max Width 1099px */
+@media only screen and (max-width:1099px){
+
+    .banner-content{
+        width: 55%;
+    }
+
+    .banner-content h1{
+        font-size: 45px;
+    }
+
+    .quick-view-container{
+        width: 70%;
+    }
+
+    .app-link-btn{
+        top: 56px;
+    }
+
+    .user-menu li a{
+        width: 95%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .booking-info-content .flight-time img{
+        width: 70px;
+    }
+
+}
+
+/* Max Width 1024px */
+@media only screen and (max-width:1024px){
+    
+    .single-option .option-select-btn h2{
+        font-size: 28px;
+    }
+
+    .filter-options{
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        padding: 12px;
+        grid-gap: 12px;
+    }
+
+    .filter-options .single-option{
+        border: 1px solid #e7e7e7;
+        border-radius: 8px;
+        padding: 12px;
+    }
+
+    .filter-options .toggle-airport{
+        left: -30px;
+    }
+
+    .more-options-wpr .single-option {
+        grid-template-columns: 24px 1fr;
+        grid-gap: 8px;
+        padding: 12px 8px;
+    }
+
+    .app-link-btn{
+        right: 107px;
+    }
+
+    .trv-filter-result-wpr{
+        margin-top: 0;
+    }
+
+    .flight-list .single-flight .flight-details{
+        gap: 32px;
+    }
+
+    #reviews .total-ratings{
+        font-size: 13px;
+    }
+
+    .prev-day span, .next-day span{
+        left: auto;
+        right: 0;
+    }
+
+    .overview-navigation .overview-nav-menu{
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        overflow-x: scroll;
+    }
+
+    .overview-navigation .overview-nav-menu::-webkit-scrollbar{
+        width: 0;
+        height: 0;
+    }
+
+    .overview-navigation .overview-nav-menu li{
+        min-width: max-content;
+    }
+
+}
+
+/* Max Width 991px */
+
+@media only screen and (max-width:991px){
+
+    .header-wpr .header-container{
+        justify-content: space-between;
+    }
+
+    .nav-btn{
+        font-size: 28px;
+        color: #fff;
+        background-color: transparent;
+        border: 0;
+        outline: none;
+    }
+
+    .header-wpr .nav-menu{
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        display: none;
+        background-color: #000;
+        z-index: 10;
+    }
+
+    .nav-menu a{
+        display: block;
+        font-weight: 500;
+        border-bottom: 1px solid #217a0280;
+        padding: 8px 16px;
+    }
+
+    .trv-apps-wpr{
+        padding: 24px;
+    }
+
+    .download-content input{
+        width: 100%;
+    }
+
+    .download-content input::placeholder{
+        font-size: 14px;
+        font-weight: var(--font-weight-semi-bold);
+    }
+
+    .app-link-btn{
+        right: 0;
+    }
+
+    .more-options-wpr{
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow: scroll;
+    }
+
+    .more-options-wpr::-webkit-scrollbar{
+        width: 0;
+        height: 0;
+    }
+
+    .more-options-wpr .single-option{
+        min-width: max-content;
+    }
+
+    .filter-toggle{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f3f6fa;
+        box-shadow: 0 2px 4px rgb(7 4 146 / 10%), 0 24px 60px rgb(6 47 125 / 5%), 0 12px 24px rgb(27 59 119 / 5%);
+        border-radius: 8px;
+        padding: 24px 50px;
+        margin-bottom: 24px;
+        cursor: pointer;
+    }
+
+    .filter-toggle i{
+        font-size: 20px;
+    }
+
+    .sidebar-filter-wpr{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0,0,0,.7);
+        margin-top: 0;
+        padding: 0;
+        z-index: 100;
+    }
+
+    .sidebar-filter-wpr.show{
+        display: flex;
+    }
+
+    .sidebar-filter-widget{
+        position: relative;
+        width: 80vw;
+        height: 80vh;
+        background-color: var(--white-color);
+        border-radius: 0;
+        overflow: scroll;
+    }
+
+    .filter-cls{
+        position: absolute;
+        top: 16px;
+        right: 50px;
+        font-size: 24px;
+        color: var(--primary-color);
+        cursor: pointer;
+    }
+
+    .flight-list .single-flight .flight-details{
+        gap: 42px;
+    }
+
+    .single-hotel .hotel-details{
+        grid-template-columns: 1fr;
+        grid-gap: 24px;
+    }
+
+    .single-hotel .hotel-price{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .visa-filter-content .filter-options{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    #room-select .room-details{
+        grid-template-columns: 1fr;
+    }
+
+    #room-select .room-info{
+        border-right: 0;
+    }
+
+    .room-price-option{
+        height: auto;
+    }
+    
+    .amenity-wpr .single-amenity{
+        grid-template-columns: 35px 1fr;
+        grid-gap: 8px;
+    }
+
+    .single-amenity .icon {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+        line-height: 35px;
+    }
+
+    .extra-amenity-wpr,
+    .amenity-wpr{
+        grid-gap: 8px;
+    }
+
+    .single-amenity b{
+        width: 95%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .extra-amenity h6{
+        width: 95%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #reviews .rating-bars-wpr{
+        padding: 0;
+        margin: 16px 0;
+    }
+
+    .booking-info-content .flight-time img{
+        width: auto;
+    }
+
+    section .video{
+        height: 400px;
+    }
+
+    .footer-top{
+        background-size: cover;
+        padding: 180px 0 40px;
+    }
+
+    .elementor-social-icons-wrapper{
+        margin-bottom: 0;
+    }
+
+    .quick-links{
+        flex-wrap: wrap;
+    }
+
+}
+
+/* Max Width 767px */
+@media only screen and (max-width:767px){
+    
+    .container{
+        max-width: 95% !important;
+    }
+
+    .owl-nav button{
+        right: 10px;
+    }
+
+    .owl-nav button.owl-prev{
+        right: 44px;
+    }
+
+    .sec-heading h2{
+        font-size: 32px;
+    }
+
+    .toolbar-right .login-btn{
+        width: 130px;
+    }
+
+    .offers-wpr,
+    .top-trips-wpr{
+        padding: 24px 0 24px 24px;
+    }
+
+    .download-content h2{
+        font-size: 28px;
+    }
+
+    .download-content p{
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .app-link-btn{
+        position: relative;
+        width: 100%;
+        top: 0;
+        border-radius: 5px;
+        margin-top: 16px;
+    }
+
+    .offers-sec-heading{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .route-name h2{
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .flight-category .nav-link{
+        padding: 8px;
+    }
+
+    .visa-details .note{
+        margin-top: 24px;
+    }
+
+    .extra-amenity-wpr{
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .amenity-wpr .single-amenity {
+        grid-template-columns: 1fr;
+        grid-gap: 8px;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .bar-content p:first-child{
+        width: 95%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    #location .nearby-hotels{
+        grid-template-columns: 1fr;
+    }
+
+    .card-heading{
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .booking-info-content{
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .booking-info-content .flight-time{
+        border: 1px solid rgb(0 140 255 / 10%);
+        border-left: 0;
+        border-right: 0;
+        padding: 8px;
+    }
+
+    .booked-flight-list .flight-details,
+    .itinerary-details{
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .toolbar-wpr{
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+    }
+    
+}
+
+/* Max Width 575px */
+@media only screen and (max-width:575px){
+
+    .apps-links{
+        margin-top: 16px;
+    }
+    
+    .form-group.required label{
+        text-align: left;
+    }
+
+    /* .login-btn{
+        display: none !important;
+    } */
+
+    .login-btn.btn-sm{
+        display: inline-block !important;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        text-align: center;
+        border-radius: 50%;
+        line-height: 40px;
+    }
+
+    .hotels-container .hotel-list .single-hotel{
+        grid-template-columns: 1fr;
+    }
+
+    .single-hotel .hotel-price{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .fare-sum-table table{
+        display: block;
+        width: 100%;
+        overflow: auto;
+    }
+
+    .booking-review-card .fare-info-wpr{
+        grid-template-columns: 1fr;
+        grid-gap: 16px;
+    }
+
+    .booking-review-card .hotel-details{
+        align-items: flex-start;
+    }
+
+    .single-visa img{
+        max-height: 200px;
+    }
+
+    .visa-details .note{
+        margin-top: 8px;
+    }
+
+    #reviews .rating-bars-wpr{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    #similar-property .property-wpr{
+        gap: 10px;
+    }
+
+    .social-links{
+        text-align: center;
+    }
+
+    .copyright p{
+        text-align: center;
+        margin-top: 16px;
+    }
+}
+
+/* Max Width 480px */
+@media only screen and (max-width:480px){
+
+    .toolbar-wpr{
+        padding: 16px 0;
+    }
+
+    .toolbar-right .offer{
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .offer .content p:last-child{
+        display: none;
+    }
+
+    .single-option .option-select-btn h2{
+        font-size: 24px;
+    }
+
+    .single-option .option-select-btn sub{
+        font-size: 17px;
+    }
+
+    .offer-item .item-content .offer-name{
+        font-size: 16px;
+    }
+
+    .filter-content .filter-types{
+        gap: 16px;
+    }
+
+    .flight-list .single-flight .flight-details{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 24px;
+    }
+
+    .route-name h2{
+        font-size: 20px;
+    }
+
+    .flight-category .nav-link p{
+        display: none;
+    }
+
+    .sidebar-filter-widget{
+        width: 90vw;
+        height: 90vh;
+    }
+
+    .content-body .fare-info-wpr{
+        grid-template-columns: 1fr;
+    }
+
+    .fare-info-wpr img{
+        width: 50px;
+        grid-gap: 4px;
+    }
+
+    .traveler-quantity button{
+        width: 35px;
+        height: 30px;
+    }
+
+    .traveler-quantity button i{
+        font-size: 14px;
+    }
+
+    .booking-review-content .sec-title{
+        flex-direction: column-reverse;
+        align-items: flex-start !important;
+        gap: 12px;
+    }
+
+    .hotel-review-card .hotel-meta-info{
+        padding: 8px 0;
+    }
+
+    .hotel-meta-info p{
+        font-size: 14px;
+        padding: 0 8px;
+    }
+
+    .extra-amenity-wpr{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .review-filter-links{
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+    }
+
+    .review-filter-links::-webkit-scrollbar{
+        width: 0;
+        height: 0;
+    }
+
+    .hotel-images .owl-nav button i{
+        font-size: 24px;
+        color: var(--primary-color);
+    }
+
+    .sec-heading h2{
+        font-size: 24px;
+    }
+
+    .user-info-dashboard .info-heading{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .info-detail .info-card{
+        padding: 16px;
+    }
+
+    .pay-methods-links .nav-link{
+        width: 95%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .pay-methods-links .nav-item{
+        margin-right: 8px;
+    }
+
+    .pay-methods .single-method label{
+        width: 100%;
+    }
+
+    .sign-btn{
+        margin: 8px 0;
+    }
+
+}
+
+/* Max Width 416px */
+@media only screen and (max-width:416px){
+
+    .main-nav .nav-link{
+        padding: 12px;
+    }
+
+    .main-nav .nav-link p{
+        display: none;
+    }
+
+    .header-wpr .login-btn.btn-sm {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        line-height: 37px;
+    }
+
+    .single-option .option-label{
+        font-size: 14px;
+    }
+
+    .flight-list .single-flight .flight-details{
+        gap: 16px;
+    }
+
+    .single-hotel .hotel-price{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .single-visa img {
+        max-height: 100px;
+    }
+
+    .booking-review-card .fare-info-wpr{
+        grid-gap: 8px;
+    }
+
+    .flight-details .tag + img{
+        width: 80px;
+    }
+
+    .hotel-review-card .flight-details{
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        align-items: start;
+        grid-gap: 4px 8px;
+    }
+
+    #reviews .rating-bars-wpr{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .overview-navigation{
+        top: 55px;
+    }
+
+    #similar-property .property-wpr{
+        display: block;
+        gap: 0;
+    }
+
+    #similar-property .single-property{
+        width: 100%;
+    }
+
+    #similar-property .single-property:not(:last-of-type){
+        margin-bottom: 24px;
+    }
+
+    .info-detail{
+        padding: 16px;
+    }
+
+    .info-card .info-list li{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .user-id img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .trv-user-dashboard .booking-list-links .nav-link{
+        flex-wrap: wrap;
+        padding: 8px 16px;
+    }
+
+    .payment-details{
+        padding: 16px;
+    }
+
+    .social-login a{
+        display: block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 55px;
+        padding: 0;
+    }
+
+    .social-login a p{
+        display: none;
+    }
+
+}
+
+/* Max Width 390px */
+@media only screen and (max-width:390px){
+
+    .filter-options,
+    .visa-filter-content .filter-options{
+        grid-template-columns: 1fr;
+    }
+
+    .filter-options .toggle-airport{
+        top: -24px;
+        left: 50%;
+        transform: translateX(-50%) rotate(90deg);
+    }
+
+    .flight-list .single-flight .flight-details{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .booking-info-content .flight-time img{
+        width: 70px;
+    }
+
+    .pay-currency .nav-link{
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+/* Max Width 380px */
+@media only screen and (max-width:380px){
+
+    .main-nav .nav-link {
+        padding: 12px 8px;
+    }
+
+    .filter-content .filter-types{
+        gap: 8px;
+    }
+
+    .booking-filter-wpr .booking-filter-links{
+        gap: 16px;
+    }
+
+    .booking-filter-links .nav-link i{
+        font-size: 32px;
+    }
+
+    .trv-user-dashboard .booking-list-links .nav-link{
+        padding: 6px 12px;
+    }
+
+    .extra-amenity-wpr{
+        grid-template-columns: 1fr;
+    }
+
+    .rules-list ul{
+        column-count: 1;
+    }
+    
+}
+
+/* Max Width 360px */
+@media only screen and (max-width:360px){
+    .filter-types .single-type label{
+        font-size: 12px;
+        font-weight: var(--font-weight-semi-bold);
+    }
+}
+
+/* Max Width 320px */
+@media only screen and (max-width:320px){
+
+    .logo img{
+        max-width: 75px;
+        height: 70px;
+    }
+
+    .banner-content h1{
+        font-size: 28px;
+    }
+
+    .banner-content p{
+        font-size: 18px;
+    }
+
+}
