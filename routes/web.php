@@ -27,7 +27,7 @@ Route::group(['as' => 'frontend.',], function () {
     Route::post('/user-register', [LandingPageController::class, 'userRegister'])->name('userRegister');
     Route::get('/user-register-otp-form', [LandingPageController::class, 'userRegisterOtpForm'])->name('userRegisterOtpForm');
     Route::post('/user-register-otp-verify', [LandingPageController::class, 'userRegisterOtpVarify'])->name('userRegisterOtpVarify');
-    
+
     Route::group(['as' => 'customPackage.', 'prefix' => 'package/'], function () {
         Route::get('/umrah', [CustomPackageController::class, 'create'])->name('create');
         Route::post('/store', [CustomPackageController::class, 'store'])->name('store');
@@ -59,3 +59,4 @@ Route::group(['prefix' => 'ajax/', 'as' => 'ajax.'], function () {
 });
 
 require __DIR__ . '/admin.php';
+require __DIR__.'/command.php';
