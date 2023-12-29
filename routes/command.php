@@ -31,12 +31,12 @@ Route::prefix('command')->group(function (){
     Route::get('/clear-optimize', function (){
         App::setLocale(session('locale'));
         Artisan::call('optimize:clear');
-        return __('notification.optimized');
+        return Artisan::output();
     });
     Route::get('/migrate', function (){
         App::setLocale(session('locale'));
         Artisan::call('migrate');
-        return __('notification.migrated');
+        return Artisan::output();
     });
 
 });
