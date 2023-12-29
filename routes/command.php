@@ -11,31 +11,32 @@ Route::prefix('command')->group(function (){
     Route::get('/clear-cache', function (){
         App::setLocale(session('locale'));
         Artisan::call('cache:clear');
-        toastr()->info(__('notification.cache_cleared'),__('notification.cache_cleared'));
-        return redirect()->back();
+        return Artisan::output();
     });
     Route::get('/clear-config', function (){
         App::setLocale(session('locale'));
         Artisan::call('config:clear');
-        toastr()->success(Artisan::output(), __('notification.config_cleared'));
-        return redirect()->back();
+
+        return Artisan::output();
     });
     Route::get('/clear-route', function (){
         App::setLocale(session('locale'));
         Artisan::call('route:clear');
-        toastr()->success(Artisan::output(), __('notification.route_cleared'));
-        return redirect()->back();
+        return Artisan::output();
     });
     Route::get('/optimize', function (){
         App::setLocale(session('locale'));
+        Artisan::call('optimize');
+        return Artisan::output();
+    });
+    Route::get('/clear-optimize', function (){
+        App::setLocale(session('locale'));
         Artisan::call('optimize:clear');
-        toastr()->success(Artisan::output(), __('notification.optimized'));
-        return redirect()->back();
+        return Artisan::output();
     });
     Route::get('/migrate', function (){
         App::setLocale(session('locale'));
         Artisan::call('migrate');
-        toastr()->success(Artisan::output(), __('notification.migrated'));
-        return redirect()->back();
+        return Artisan::output();
     });
 });
