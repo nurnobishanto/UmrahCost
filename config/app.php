@@ -29,7 +29,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-
+    'ssl' => env('APP_SSL', 'http'),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
