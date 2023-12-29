@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Models\Location;
 use App\Models\PackageType;
 use App\Models\RoomType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Brian2694\Toastr\Facades\Toastr;
@@ -37,7 +38,7 @@ class RoomTypeController extends Controller
                 })->addColumn('nos_of_traveler', function ($data) {
                     return $data->nos_of_traveler ?? '';
                 })->addColumn('cost_per_day', function ($data) {
-                    return $data->cost_per_day ?? ''; 
+                    return $data->cost_per_day ?? '';
                 })->addColumn('hotel_name', function ($data) {
                     if($data?->hotel?->location?->name){
                         return $data?->hotel?->name .'('.$data?->hotel?->location?->name.')';
@@ -85,7 +86,7 @@ class RoomTypeController extends Controller
             $query->whereHas('package.packageTypes',function($q) use ($request){
                 $q->where('id',$request->package_type_id);
             });
-        })->where('status',1)->get();  
+        })->where('status',1)->get();
         $hotels = Hotel::when($request->filled('location_id'), function ($q) use ($request) {
             $q->where('location_id',$request->location_id);
         })->where('status',1)->get();
@@ -125,6 +126,8 @@ class RoomTypeController extends Controller
             'nos_of_traveler'   => 'required',
             'cost_per_day'      => 'required',
             'hotel'             => 'required',
+            'from_date'             => 'required',
+            'to_date'             => 'required',
         ]);
 
         $roomType                   = new RoomType();
@@ -132,6 +135,8 @@ class RoomTypeController extends Controller
         $roomType->nos_of_traveler  = $request->nos_of_traveler;
         $roomType->cost_per_day     = $request->cost_per_day;
         $roomType->hotel_id         = $request->hotel;
+        $roomType->from_date        = Carbon::createFromFormat('d/m/Y', $request->from_date)->format('Y-m-d');
+        $roomType->to_date          = Carbon::createFromFormat('d/m/Y', $request->to_date)->format('Y-m-d');
         $roomType->status = 1;
 
         try {
@@ -182,6 +187,7 @@ class RoomTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         if(!check_permission('Room Type Edit')){
             abort(403);
         }
@@ -191,12 +197,16 @@ class RoomTypeController extends Controller
             'nos_of_traveler'   => 'required',
             'cost_per_day'      => 'required',
             'hotel'             => 'required',
+            'from_date'         => 'required',
+            'to_date'           => 'required',
         ]);
 
         $roomType->name             = $request->name;
         $roomType->nos_of_traveler  = $request->nos_of_traveler;
         $roomType->hotel_id         = $request->hotel;
         $roomType->cost_per_day     = $request->cost_per_day;
+        $roomType->from_date        = Carbon::createFromFormat('d/m/Y', $request->from_date)->format('Y-m-d');
+        $roomType->to_date          = Carbon::createFromFormat('d/m/Y', $request->to_date)->format('Y-m-d');
         $roomType->save();
         try {
             $roomType->save();

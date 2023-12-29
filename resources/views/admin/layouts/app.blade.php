@@ -32,9 +32,9 @@
         </div>
     </div>
     <!-- Start JS -->
-    <audio id="myAudio">
-        <source src="{{ asset('assets/sounds/sound-1.mp3') }}" type="audio/mpeg">
-    </audio>
+{{--    <audio id="myAudio">--}}
+{{--        <source src="{{ asset('assets/sounds/sound-1.mp3') }}" type="audio/mpeg">--}}
+{{--    </audio>--}}
 
     @include('admin.layouts.includes.scripts')
     @if (session()->has('success'))
@@ -57,7 +57,7 @@
             });
         </script>
     @endif
-    
+
     @if (session()->has('play_audio'))
         <script>
             document.getElementById("myAudio").play();

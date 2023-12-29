@@ -43,18 +43,27 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </fieldset>
+
                             <fieldset class="ams-input">
-                                <label for="travel_date">Travel Date(Tentative)</label>
-                             <input type="date" value="{{ old('travel_date') }}" name="travel_date" id="travel_date">
-                                @error('travel_date')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <label for="from_travel_date">From Travel Date(Tentative)</label>
+                                <input type="text" readonly value="{{ old('from_travel_date',$today) }}" name="from_travel_date" id="from_travel_date">
+                                @error('from_travel_date')
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </fieldset>
+                            <fieldset class="ams-input">
+                                <label for="travel_date">BetweenTravel Date(Tentative)</label>
+                                <input type="text" readonly value="{{ old('travel_date',$afterSevenDays) }}" name="travel_date" id="travel_date">
+                                @error('travel_date')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </fieldset>
+
                             <fieldset class="ams-input">
                                 <label for="nos_of_traveler">Nos Of Travelers</label>
                                 <select name="nos_of_traveler" id="nos_of_traveler" class="form-control" required onchange="changeHotelOrTravelerNumber()" >
                                     <option value="">Select One</option>
-                                    @foreach (number_range_to_array(1,10) as $number)
+                                    @foreach ($travelers as $number)
                                         <option @if($number == old('nos_of_traveler')) selected @endif value="{{ $number }}">{{ $number }} </option>
                                     @endforeach
                                 </select>
@@ -135,9 +144,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </fieldset>
-                            <fieldset class="ams-input">
-                            
-                            </fieldset>
+
 
                             <fieldset class="ams-input">
                                 <label for="transport_included">Transport</label>
@@ -179,8 +186,8 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </fieldset>
-                           
-                            
+
+
 
                             <fieldset class="ams-input">
                                 <label for="guide">Guide Type(Required if included)</label>
@@ -228,10 +235,10 @@
                             @endforeach
 
                             <fieldset class="ams-input">
-                            
+
                             </fieldset>
 
-                            
+
                             <fieldset class="ams-input">
                                 <label for="food">Food</label>
                                 <select name="food" id="food" class="form-control">
@@ -264,6 +271,14 @@
     </div>
 @endsection
 @push('script')
+    <style>
+        /* Custom CSS for disabled dates */
+
+        .datepicker table tr td.disabled {
+            color: #ebebeb; /* Change the color to your preferred disabled color */
+            background-color: #515151; /* Change the background color to your preferred disabled background color */
+        }
+    </style>
     <script type="text/javascript">
         const LOCATIONS = {!! $locations !!};
 
@@ -278,6 +293,31 @@
         }
 
         $(document).ready(function() {
+            $('#from_travel_date').datepicker({
+                format: 'yyyy-mm-dd', // Set your desired date format here
+                autoclose: true,
+                endDate: '{{$latestToDate}}'
+            }).on('changeDate', function (selectedDate) {
+                // Update maxDate of 'to_date' datepicker
+                var travelDate = new Date(selectedDate.date.valueOf());
+                travelDate.setDate(travelDate.getDate() + 7);
+                $('#travel_date').datepicker('setStartDate', selectedDate.date);
+                var latestToDate = '{{$latestToDate}}';
+                if (travelDate <= new Date('{{$latestToDate}}')){
+                    $('#travel_date').datepicker('setDate', travelDate);
+                }else {
+                    $('#travel_date').datepicker('setDate', latestToDate);
+                }
+                changeHotelOrTravelerNumber();
+            });
+            $('#travel_date').datepicker({
+                format: 'yyyy-mm-dd', // Set your desired date format here
+                autoclose: true,
+                endDate: '{{$latestToDate}}'
+            }).on('changeDate',function (selectDate){
+                changeHotelOrTravelerNumber();
+            });
+
             $('#transport_included').on('change', function() {
                 if ($(this).val() === '1') {
                     $('#transport').prop('required', true);
@@ -293,7 +333,7 @@
                     $('#guide').prop('required', false);
                 }
             });
-            
+
             $('#sightseeing_included').on('change', function() {
                 if ($(this).val() === '1') {
                     $('.sightseeing_class').prop('required', true);
@@ -304,7 +344,7 @@
 
             $('#package_type').change(function() {
                 var packageType = $(this).val();
-               
+
                 if (packageType) {
                     LOCATIONS.forEach((location, key) => {
                         $("#hotel" + key).empty();
@@ -334,34 +374,42 @@
 
         function changeHotelOrTravelerNumber() {
             let nosOfTraveler = $('#nos_of_traveler').val();
-            
+
             if (nosOfTraveler) {
-               
+
                 LOCATIONS.forEach((location, key) => {
                     let hotelId = $("#hotel" + key).val();
                     let roomTypeValue = $("#room_type" + key).val();
+                    let from_travel_date = $('#from_travel_date').val();
+                    let travel_date = $('#travel_date').val();
+                    console.log(from_travel_date);
+                    console.log(travel_date);
                     if (hotelId) {
-                        
+
                         $("#room_type" + key).empty();
                         $("#room_type" + key).append('<option value="">Searching....</option>');
                         $.ajax({
                             type: "GET",
                             url: "{{ url('ajax/room-type-by-traveler-and-hotel') }}/" + nosOfTraveler +
                                 "/" + hotelId,
+                            data:{
+                                'travel_date':travel_date,
+                                'from_travel_date':from_travel_date,
+                            },
                             success: function(res) {
                                 if (res) {
                                     $("#room_type" + key).empty();
                                     // $("#room_type" + key).append('<option value="" >Select One</option>');
                                     $.each(res, function(childKey, value) {
-                                        
+
                                         $("#room_type" + key).append('<option value="' + value.id + '">' + value.name + '</option>');
-                                        
-                                        
+
+
                                     });
-                                    
-                                } 
+
+                                }
                                 else {
-                                    
+
                                     $("#room_type" + key).empty();
                                 }
                             }

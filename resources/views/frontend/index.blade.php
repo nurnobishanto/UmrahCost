@@ -19,7 +19,7 @@
                             <th scope="col">#SL</th>
                             <th scope="col">Package</th>
                             <th scope="col">Package Type</th>
-                            <th scope="col">Travel Date</th>
+                            <th scope="col">Travel Date (Tentative)</th>
                             <th scope="col">Traveler</th>
                             <th scope="col">Created at</th>
                             <th scope="col">Invoice</th>
@@ -31,7 +31,7 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $customPackage?->packageType?->package?->name }}</td>
                                 <td>{{ $customPackage?->packageType?->name }}</td>
-                                <td>{{ common_date_format($customPackage?->travel_date) }}</td>
+                                <td>{{ common_date_format($customPackage?->from_travel_date) }} - {{ common_date_format($customPackage?->travel_date) }}</td>
                                 <td>{{ $customPackage?->nos_of_traveler }}</td>
                                 <td>{{ common_date_time_format($customPackage?->created_at) }}</td>
                                 <td>
@@ -251,7 +251,7 @@
                 success: function(response) {
                     $('#modalBody').html(response);
                 }
-            }); 
+            });
         }
     </script>
 @endpush

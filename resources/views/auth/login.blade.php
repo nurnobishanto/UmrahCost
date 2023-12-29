@@ -24,7 +24,7 @@
         </div>
     </header>
 
-    <main class="trv-main-content">
+    <main class="trv-main-content" >
         <!-- Sign Modal -->
         <div class="sign-modal-wpr">
             <div class="sign-in-content modal-content">
@@ -134,7 +134,7 @@
                                 <fieldset class="input-grp">
                                     <label for="pass" class="required">Password</label>
                                     <div class="inputWithIcon">
-                                        <input type="password" placeholder="Enter Password" id="password" name="password"> 
+                                        <input type="password" placeholder="Enter Password" id="password" name="password">
                                         <i class="icofont-ui-lock"></i>
                                         <div class="pass-input">
                                             <i class="icofont-eye-blocked"></i>
@@ -149,7 +149,7 @@
                                 <fieldset class="input-grp">
                                     <label for="password_confirmation" class="required">Password</label>
                                     <div class="inputWithIcon">
-                                        <input type="password" placeholder="Enter Confirm Password" id="password_confirmation" name="password_confirmation"> 
+                                        <input type="password" placeholder="Enter Confirm Password" id="password_confirmation" name="password_confirmation">
                                         <i class="icofont-ui-lock"></i>
                                         <div class="pass-input">
                                             <i class="icofont-eye-blocked"></i>
@@ -170,7 +170,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer bg-dark py-2 ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-sm-6">

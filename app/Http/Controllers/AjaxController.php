@@ -23,10 +23,28 @@ class AjaxController extends Controller
     {
         return Hotel::where([['package_type_id',$package_type_id],['location_id',$location_id],['status',1]])->get();
     }
-    
-    public function roomTypeByTravelerAndHotel($nos_of_traveler, $hotel_id)
+
+    public function roomTypeByTravelerAndHotel(Request $request,$nos_of_traveler, $hotel_id)
     {
-        return RoomType::where([['nos_of_traveler',$nos_of_traveler],['hotel_id',$hotel_id],['status',1]])->get();
+        $from_travel_date = $request->from_travel_date;
+        $travel_date = $request->travel_date;
+
+        $roomTypes = RoomType::where([
+            ['nos_of_traveler', $nos_of_traveler],
+            ['hotel_id', $hotel_id],
+            ['status', 1],
+        ]);
+
+//        if ($from_travel_date) {
+//            $roomTypes->whereDate('from_date', '<=', $from_travel_date);
+//            $roomTypes->whereDate('to_date', '>=', $from_travel_date);
+//        }
+        if ($travel_date) {
+            $roomTypes->whereDate('from_date', '<=', $travel_date);
+            $roomTypes->whereDate('to_date', '>=', $travel_date);
+        }
+
+        return $roomTypes->get();
     }
-    
+
 }

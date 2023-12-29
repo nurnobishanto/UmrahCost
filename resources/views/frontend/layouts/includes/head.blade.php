@@ -23,6 +23,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/responsive.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/toaster.min.css') }}">
 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-date-range-picker/0.21.1/daterangepicker.min.css">
 @stack('style')
 
 <!--[if lt IE 9]>

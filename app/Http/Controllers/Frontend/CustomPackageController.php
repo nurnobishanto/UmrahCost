@@ -24,19 +24,27 @@ class CustomPackageController extends Controller
     public function create()
     {
         // dd('ok');
+        $roomType = RoomType::all();
+        $travelers = RoomType::orderBy('nos_of_traveler', 'asc')
+            ->distinct()
+            ->pluck('nos_of_traveler');
+        $earliestFromDate = $roomType->min('from_date');
+        $latestToDate = $roomType->max('to_date');
+        $today = Carbon::today()->addDays(1)->format('Y-m-d');
+        $afterSevenDays = Carbon::today()->addDays(8)->format('Y-m-d');
         $package_id = 1;
-
         $packageTypes = PackageType::where([['status', 1], ['package_id', $package_id]])->get();
         $airlines = Airline::where([['status', 1], ['package_id', $package_id]])->get();
         $locations = Location::with(['hotels','sightseeings'])->where([['status', 1], ['package_id', $package_id]])->get();
         $transports = Transport::where([['status', 1], ['package_id', $package_id]])->get();
         $guides = Guide::where([['status', 1], ['package_id', $package_id]])->get();
 
-        return view('frontend.customPackage.create', compact('packageTypes', 'airlines', 'locations','transports','guides'));
+        return view('frontend.customPackage.create', compact('packageTypes', 'airlines', 'locations','transports','guides','earliestFromDate','latestToDate','today','afterSevenDays','travelers'));
     }
 
     public function store(Request $request)
     {
+
         $request->validate([
             'package_type' => [
                 'required',
@@ -46,6 +54,7 @@ class CustomPackageController extends Controller
                 'required',
                 Rule::exists('packages', 'id'),
             ],
+            'from_travel_date'       => 'required',
             'travel_date'       => 'required',
             'nos_of_traveler'   => 'required',
             'room_type' => [
@@ -81,6 +90,7 @@ class CustomPackageController extends Controller
             $customPackage = new CustomPackage();
             $customPackage->package_type_id         = $request->package_type;
             $customPackage->airline_id              = $request->airline;
+            $customPackage->from_travel_date        = Carbon::parse($request->from_travel_date);
             $customPackage->travel_date             = Carbon::parse($request->travel_date);
             $customPackage->total_stay              = $request->total_stay;
             $customPackage->note                    = $request->note;
@@ -135,7 +145,7 @@ class CustomPackageController extends Controller
                 $customPackageHotel->stay_in            = $request->stay[$key];
                 $customPackageHotel->save();
             }
-            
+
             if($request->guide && count($request->guide)){
                 foreach ($request->guide as $key => $guide_id) {
                     if ($request->guide_included == 1) {

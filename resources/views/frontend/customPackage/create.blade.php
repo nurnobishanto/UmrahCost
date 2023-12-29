@@ -43,23 +43,39 @@
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <fieldset class="input-grp">
-                                                        <label for="travel_date" class="required">Travel
-                                                            Date(Tentative)</label>
-                                                        <input type="date" value="{{ old('travel_date') }}"
-                                                            id="travel_date" name="travel_date">
-                                                        @error('travel_date')
-                                                            <p class="text-danger alert-margin">{{ $message }}</p>
-                                                        @enderror
-                                                    </fieldset>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <fieldset class="input-grp">
+                                                                <label for="from_travel_date" class="required">From Travel
+                                                                    Date(Tentative)</label>
+                                                                <input type="text" readonly value="{{ old('from_travel_date',$today) }}"
+                                                                       id="from_travel_date" name="from_travel_date">
+                                                                @error('from_travel_date')
+                                                                <p class="text-danger alert-margin">{{ $message }}</p>
+                                                                @enderror
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <fieldset class="input-grp">
+                                                                <label for="travel_date" class="required">Between Travel
+                                                                    Date(Tentative)</label>
+                                                                <input type="text" readonly value="{{ old('travel_date',$afterSevenDays) }}"
+                                                                       id="travel_date" name="travel_date">
+                                                                @error('travel_date')
+                                                                <p class="text-danger alert-margin">{{ $message }}</p>
+                                                                @enderror
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <fieldset class="input-grp">
                                                         <label for="nos_of_traveler" class="required">Nos Of
                                                             Travelers</label>
                                                         <select class="nice-select" id="nos_of_traveler" name="nos_of_traveler" onchange="changeHotelOrTravelerNumber()">
                                                             <option value="">Select One</option>
-                                                            @foreach (number_range_to_array(1, 10) as $number)
+                                                            @foreach ($travelers as $number)
                                                                 <option @selected($number == old('nos_of_traveler'))
                                                                     value="{{ $number }}">{{ $number }}
                                                                 </option>
@@ -70,7 +86,7 @@
                                                         @enderror
                                                     </fieldset>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <fieldset class="input-grp">
                                                         <label for="visa" class="required">Visa</label>
                                                         <select class="nice-select" name="visa" id="visa">
@@ -85,7 +101,7 @@
                                                         @enderror
                                                     </fieldset>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <fieldset class="input-grp">
                                                         <label for="airline" class="required">Airlines</label>
                                                         <select class="nice-select" id="airline" name="airline">
@@ -119,7 +135,7 @@
                                                         </fieldset>
                                                     </div>
                                                 @endforeach
-                                                
+
                                                 @foreach ($locations as $key => $location)
                                                     <div class="col-lg-6">
                                                         <fieldset class="input-grp">
@@ -149,18 +165,18 @@
                                                             @enderror
                                                         </fieldset>
                                                     </div>
-                                                    
+
                                                 @endforeach
                                                 <div class="col-lg-6">
                                                     <fieldset class="input-grp">
                                                         <label for="total_stay" class="required">Total Stay</label>
-                                                        <input type="number" step="any" id="total_stay"
+                                                        <input type="number" readonly step="any" id="total_stay"
                                                             value="{{ old('total_stay') }}" name="total_stay">
                                                         @error('total_stay')
                                                             <p class="text-danger alert-margin">{{ $message }}</p>
                                                         @enderror
                                                     </fieldset>
-                                                  
+
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -215,7 +231,7 @@
                                                         <select name="guide[]" id="custom-multiple-select" multiple>
                                                             <option value="">Select One</option>
                                                             @foreach ($guides as $guide)
-                                                                <option @selected(old('guide') == $guide->id)
+                                                                <option @selected(old('guide') == $guide->id || $guide->id==1)
                                                                     value="{{ $guide->id }}">{{ $guide->name }}
                                                                 </option>
                                                             @endforeach
@@ -335,7 +351,7 @@
         const LOCATIONS = {!! $locations !!};
 
         function countTotalStay() {
-            let sum = 0;            
+            let sum = 0;
             $('.stay_class').each(function() {
                 if (!isNaN(parseFloat($(this).val()))) {
                     sum += parseFloat($(this).val());
@@ -343,7 +359,7 @@
             });
             $('#total_stay').val(sum);
         }
-        
+
 
         function changeHotelOrTravelerNumber() {
             let nosOfTraveler = $('#nos_of_traveler').val();
@@ -351,6 +367,10 @@
                 LOCATIONS.forEach((location, key) => {
                     let hotelId = $("#hotel" + key).val();
                     let roomTypeValue = $("#room_type" + key).val();
+                    let from_travel_date = $('#from_travel_date').val();
+                    let travel_date = $('#travel_date').val();
+                    console.log(from_travel_date);
+                    console.log(travel_date);
                     if (hotelId ) {
                         $("#room_type" + key).empty();
                         $("#room_type" + key).append('<option value="">Searching....</option>');
@@ -358,13 +378,17 @@
                         $.ajax({
                             type: "GET",
                             url: "{{ url('ajax/room-type-by-traveler-and-hotel') }}/" + nosOfTraveler +
-                                "/" + hotelId,
+                                "/" + hotelId ,
+                            data:{
+                                'travel_date':travel_date,
+                                'from_travel_date':from_travel_date,
+                            },
                             success: function(res) {
                                 if (res) {
                                     $("#room_type" + key).empty();
                                     // $("#room_type" + key).append('<option value="">Select One</option>');
                                     $.each(res, function(childKey, value) {
-                                        $("#room_type" + key).append('<option value="' + value.id + '">' + value.name + '</option>');
+                                        $("#room_type" + key).append('<option value="' + value.id + '">' + value.name +'</option>');
                                     });
                                     $('#room_type' + key).niceSelect('update');
                                 } else {
@@ -382,6 +406,28 @@
         }
 
         $(document).ready(function() {
+            $('#travel_date').datepicker({
+                dateFormat: 'yy-mm-d',
+                minDate: 1,
+                maxDate: '{{$latestToDate}}',
+                onSelect: function (){
+                    changeHotelOrTravelerNumber();
+                }
+            });
+
+            $('#from_travel_date').datepicker({
+                dateFormat: 'yy-mm-d',
+                minDate: 1,
+                maxDate: '{{$latestToDate}}',
+                onSelect: function(selectedDate) {
+                    // Update maxDate of 'travel_date' datepicker
+                    var travelDate = $.datepicker.parseDate('yy-mm-d', selectedDate);
+                    travelDate.setDate(travelDate.getDate() + 7);
+                    $('#travel_date').datepicker('option', 'minDate', selectedDate);
+                    $('#travel_date').datepicker('setDate', travelDate);
+                    changeHotelOrTravelerNumber()
+                },
+            });
             $('#package_type').change(function() {
                 var packageType = $(this).val();
                 if (packageType) {
@@ -433,7 +479,7 @@
                     $('#guide').prop('required', false).niceSelect('update');
                 }
             });
-            
+
             $('#sightseeing_included').on('change', function() {
                 if ($(this).val() === '1') {
                     $('.sightseeing_class').prop('required', true).niceSelect('update');

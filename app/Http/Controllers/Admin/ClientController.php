@@ -40,7 +40,7 @@ class ClientController extends Controller
         if(!check_permission('Client List')){
             abort(403);
         }
-        
+
         $show = $request->filled('show') ? $request->show : 10;
         $clients   = User::query()
                         ->when($request->filled('table_search'), function ($query) use ($request) {
@@ -126,7 +126,7 @@ class ClientController extends Controller
         $user->crm_id           = $request->crm;
         $user->status_id        = $request->status;
         $user->client_status_id = $request->client_status;
-        
+
 
         if ($request->hasFile('avatar')) {
             $image             = $request->file('avatar');
@@ -201,7 +201,7 @@ class ClientController extends Controller
             abort(403);
         }
         $user = User::findOrFail($id);
-        
+
         $request->validate([
             'name' => 'required|min:1|max:200',
             'email' => 'required|email|unique:users,email,'.$user->id,
@@ -228,7 +228,7 @@ class ClientController extends Controller
         $user->notes            = $request->notes;
         $user->number_of_person = $request->number_of_person;
         $user->tour_month       = $request->tour_month;
-        
+
         $user->query_about_id   = $request->query_about;
         $user->client_source_id = $request->client_source;
         $user->client_feedback_id = $request->client_feedback;
@@ -323,23 +323,31 @@ class ClientController extends Controller
         if(!check_permission('Client To Package Create')){
             abort(403);
         }
+        $roomType = RoomType::all();
+        $travelers = RoomType::orderBy('nos_of_traveler', 'asc')
+            ->distinct()
+            ->pluck('nos_of_traveler');
+        $earliestFromDate = $roomType->min('from_date');
+        $latestToDate = $roomType->max('to_date');
+        $today = Carbon::today()->addDays(1)->format('Y-m-d');
+        $afterSevenDays = Carbon::today()->addDays(8)->format('Y-m-d');
         $user = User::find($client_id);
         $package_id = 1;
-        
+
         $packageTypes = PackageType::where([['status', 1], ['package_id', $package_id]])->get();
         $airlines = Airline::where([['status', 1], ['package_id', $package_id]])->get();
         $locations = Location::with(['hotels','sightseeings'])->where([['status', 1], ['package_id', $package_id]])->get();
         $transports = Transport::where([['status', 1], ['package_id', $package_id]])->get();
         $guides = Guide::where([['status', 1], ['package_id', $package_id]])->get();
-        
-        return view('admin.client.packageCreate', compact('user','packageTypes','airlines','locations','transports','guides'));
+
+        return view('admin.client.packageCreate', compact('user','packageTypes','airlines','locations','transports','guides','travelers','earliestFromDate','latestToDate','today','afterSevenDays'));
     }
 
     public function packageStore(Request $request , $client_id){
         if(!check_permission('Client To Package Create')){
             abort(403);
         }
-
+        return $request;
         $request->validate([
             'package_type' => [
                 'required',
@@ -349,6 +357,7 @@ class ClientController extends Controller
                 'required',
                 Rule::exists('packages', 'id'),
             ],
+            'from_travel_date'       => 'required',
             'travel_date'       => 'required',
             'nos_of_traveler'   => 'required',
             'room_type' => [
@@ -382,9 +391,10 @@ class ClientController extends Controller
             $package = Package::find($request->package_id);
 
             $customPackage = new CustomPackage();
-            $customPackage->client_id              = $client_id;
+            $customPackage->client_id               = $client_id;
             $customPackage->package_type_id         = $request->package_type;
             $customPackage->airline_id              = $request->airline;
+            $customPackage->from_travel_date             = Carbon::parse($request->from_travel_date);
             $customPackage->travel_date             = Carbon::parse($request->travel_date);
             $customPackage->total_stay              = $request->total_stay;
             $customPackage->note                    = $request->note;
@@ -395,9 +405,9 @@ class ClientController extends Controller
             $customPackage->guide_included          = $request->guide_included ?? 0;
             $customPackage->sightseeing_included    = $request->sightseeing_included ?? 0;
             $customPackage->food_included           = $request->food ?? 0;
-            
+
             $airline = Airline::find($request->airline);
-         
+
             $customPackage->airline_cost = $airline->cost;
             if ($request->visa == 1) {
                 $customPackage->visa_cost = $package->cost_of_visa;
@@ -405,22 +415,22 @@ class ClientController extends Controller
             if ($request->food == 1) {
                 $customPackage->food_cost = $package->food_cost;
             }
-            
+
             if ($request->transport_included == 1) {
                 $customPackage->transport_id = $request->transport;
                 $transport = Transport::find($request->transport);
                 $customPackage->transport_cost = $transport?->cost;
-            } 
-            
+            }
+
             $customPackage->conversion_rate = $package?->currency?->value;
-            
+
             $customPackage->save();
-            
+
             foreach ($request->location_ids as $key => $location_id) {
                 $location = Location::find($location_id);
-                
+
                 $customPackageHotel                     = new CustomPackageHotel();
-                               
+
                 if ($request->sightseeing_included == 1) {
                     $customPackageHotel->sightseeing_id = $request->sightseeing[$key];
                     $sightseeing = Sightseeing::find($request->sightseeing[$key]);
@@ -430,7 +440,7 @@ class ClientController extends Controller
                 $customPackageHotel->room_type_id = $request->room_type[$key];
                 $roomType = RoomType::find($request->room_type[$key]);
                 $customPackageHotel->room_cost = $roomType?->cost_per_day ?? 0;
-                
+
                 $customPackageHotel->custom_package_id  = $customPackage->id;
                 $customPackageHotel->hotel_id           = $request->hotel[$key];
                 $customPackageHotel->location_id        = $location_id;
@@ -442,7 +452,7 @@ class ClientController extends Controller
                 foreach ($request->guide as $key => $guide_id) {
                     if ($request->guide_included == 1) {
                         $guide = Guide::find($guide_id);
-    
+
                         if($guide){
                             $customPackageGuide                     = new CustomPackageGuide();
                             $customPackageGuide->guide_id = $guide_id;

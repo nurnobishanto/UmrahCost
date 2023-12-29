@@ -65,9 +65,10 @@
                     <thead>
                         <tr>
                             <th>SL</th>
+                            <th>Date Range</th>
                             <th>Name</th>
                             <th>Nos Of Traveler</th>
-                            <th>Cost Per Day (In package currency for all members)</th>
+                            <th>Cost Per Day <small>(In package currency for all members)</small></th>
                             <th>Hotel</th>
                             <th>Active</th>
                             <th>Action</th>
@@ -90,7 +91,7 @@
             let hotel_id = $('#hotel_id').val();
             let url = `{!! route('admin.roomType.index', ['package_type_id' => 'package_type_value','location_id' => 'location_value','hotel_id' => 'hotel_value']) !!}`;
             url = url.replace('package_type_value', package_type_id).replace('location_value', location_id).replace('hotel_value', hotel_id);
- 
+
 
             $('#datatable').DataTable({
                 responsive: true,
@@ -105,6 +106,18 @@
                         name: 'DT_RowIndex',
                         orderable: false,
                         searchable: false
+                    },
+                    {
+                        data: null,
+                        searchable: true,
+                        render: function(data, type, row) {
+                            var fromDate = moment(row.from_date).format('DD/MM/YYYY');
+                            var toDate = moment(row.to_date).format('DD/MM/YYYY');
+                            var concatenatedDate = fromDate + ' to ' + toDate;
+
+
+                            return concatenatedDate;
+                        }
                     },
                     {
                         data: 'name',

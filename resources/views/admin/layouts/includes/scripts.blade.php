@@ -20,7 +20,7 @@
 <script src="{{ asset('assets/backend/js/sweetalert.min.js') }}"></script>
 {!! Toastr::message() !!}
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-<audio id="audiotag1" src="{{ asset('assets/sounds/sound-1.mp3') }}" preload="auto"></audio>
+{{--<audio id="audiotag1" src="{{ asset('assets/sounds/sound-1.mp3') }}" preload="auto"></audio>--}}
 
 @stack('script')
 <script src="{{ asset('assets/backend/js/main.js') }}"></script>
