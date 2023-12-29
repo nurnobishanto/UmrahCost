@@ -16,7 +16,6 @@ Route::prefix('command')->group(function (){
     Route::get('/clear-config', function (){
         App::setLocale(session('locale'));
         Artisan::call('config:clear');
-        
         return Artisan::output();
     });
     Route::get('/clear-route', function (){
@@ -25,11 +24,6 @@ Route::prefix('command')->group(function (){
         return Artisan::output();
     });
     Route::get('/optimize', function (){
-        App::setLocale(session('locale'));
-        Artisan::call('optimize');
-        return Artisan::output();
-    });
-    Route::get('/clear-optimize', function (){
         App::setLocale(session('locale'));
         Artisan::call('optimize:clear');
         return Artisan::output();
