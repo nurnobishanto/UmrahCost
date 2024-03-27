@@ -16,6 +16,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ServiceVoucherController extends Controller
 {
@@ -94,6 +97,20 @@ class ServiceVoucherController extends Controller
             abort(403);
         }
 
+        $validator = Validator::make($request->all(), [
+            'client' => 'required',
+            'serial_no' => 'required',
+            'guest_name.0' => 'required',
+            'passport_no.0' => 'required',
+            'guest_visha.0' => 'required|image', // Assuming you're validating an image upload
+            'date.0' => 'required|date',
+            'career.0' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         try {
             DB::beginTransaction();
 
@@ -128,6 +145,23 @@ class ServiceVoucherController extends Controller
                     $voucherGuest->service_voucher_id = $serviceVoucher->id;
                     $voucherGuest->name = $guest_name;
                     $voucherGuest->passport_no = $request->passport_no[$key] ? $request->passport_no[$key] : null;
+                    // Process guest visha image
+                    if ($request->hasFile('guest_visha.'.$key) && $request->file('guest_visha.'.$key)->isValid()) {
+                        $imageVisha = $request->file('guest_visha.'.$key);
+                        $folder_path = public_path('uploads/images/service/');
+                        $visha_image_new_name = Str::random(10) . '-' . time() . '.' . $imageVisha->getClientOriginalExtension();
+                        Image::make($imageVisha->getRealPath())->save(public_path($folder_path . $visha_image_new_name));
+                        $voucherGuest->visha = $folder_path . $visha_image_new_name;
+                    }
+
+                    // Process guest passport image
+                    if ($request->hasFile('guest_passport.'.$key) && $request->file('guest_passport.'.$key)->isValid()) {
+                        $imagePassport = $request->file('guest_passport.'.$key);
+                        $folder_path = public_path('uploads/images/service/');
+                        $passport_image_new_name = Str::random(10) . '-' . time() . '.' . $imagePassport->getClientOriginalExtension();
+                        Image::make($imagePassport->getRealPath())->save(public_path($folder_path . $passport_image_new_name));
+                        $voucherGuest->passport = $folder_path . $passport_image_new_name;
+                    }
                     $voucherGuest->save();
                 }
             }

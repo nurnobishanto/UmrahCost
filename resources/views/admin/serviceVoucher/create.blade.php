@@ -116,9 +116,9 @@
                                                  alt="Preview Banner" width="150" height="150" />
 
                                             <label for="guest_visha">Guest Visha<sup class="required">*</sup></label>
-                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="guest_visha" id="guest_visha"
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="guest_visha[]" id="guest_visha"
                                                    onchange="document.getElementById('visha_review').src = window.URL.createObjectURL(this.files[0])">
-                                            @error('guest_visha')
+                                            @error('guest_vish.0a')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </fieldset>
@@ -129,9 +129,9 @@
                                                  alt="Preview Banner" width="150" height="150" />
 
                                             <label for="guest_passport">Guest Visha<sup class="required">*</sup></label>
-                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="guest_passport" id="guest_passport"
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="guest_passport[]" id="guest_passport"
                                                    onchange="document.getElementById('passport_review').src = window.URL.createObjectURL(this.files[0])">
-                                            @error('passport_review')
+                                            @error('passport_review.0')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </fieldset>
