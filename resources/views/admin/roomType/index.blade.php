@@ -11,7 +11,7 @@
             <div class="panel-heading">
                 <h5 class="panel-title">Room Type List & Price</h5>
 {{--                <a href="{{ route('admin.roomType.create') }}" class="panel-item">+ Add Room Type</a>--}}
-                <a type="button" class="panel-item" href="{{route('admin.roomType.room_type.export')}}">
+                <a type="button" class="panel-item" href="{{route('room_type.export')}}">
                     Export
                 </a>
                 <a type="button" class="panel-item" data-bs-toggle="modal" data-bs-target="#roomTypeModal">

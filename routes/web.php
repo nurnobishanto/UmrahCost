@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Frontend\CreatedPackageController;
 use App\Http\Controllers\Frontend\CustomPackageController;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('rt/export', [RoomTypeController::class, 'export_xl'])->name('room_type.export');
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirectToDashboard');
 
 Route::group(['as' => 'frontend.',], function () {

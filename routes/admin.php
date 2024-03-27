@@ -84,7 +84,7 @@ Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth', '
     Route::resource('roomType', RoomTypeController::class);
     Route::group(['prefix' => 'roomType/', 'as' => 'roomType.'], function () {
         Route::post('status-change', [RoomTypeController::class, 'statusChange'])->name('status.change');
-        Route::get('/export', [RoomTypeController::class, 'export_xl'])->name('room_type.export');
+
 
     });
 
