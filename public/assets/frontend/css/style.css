@@ -3320,9 +3320,11 @@ ul.psnger-meta-info li{
 /* Footer */
 
 .footer-top{
-   background: url("../images/banner/footer-bg-image.png") no-repeat left top;
-   padding-top: 120px;
+    background: url("../images/banner/footer-bg-image.png") no-repeat left top;
+    padding-top: 120px;
+    background-size: cover;
 }
+
 
 .footer-top .logo img{
     width: 100px;
