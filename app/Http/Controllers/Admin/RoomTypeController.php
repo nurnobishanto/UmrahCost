@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\HotelsExport;
 use App\Exports\RoomTypeExport;
 use App\Http\Controllers\Controller;
+use App\Imports\RoomTypesImport;
 use App\Models\Hotel;
 use App\Models\Location;
 use App\Models\PackageType;
@@ -32,7 +34,27 @@ class RoomTypeController extends Controller
     {
         return $this->excel->download(new RoomTypeExport(), 'room_types.xlsx');
     }
-   
+    public function hotel_export_xl()
+    {
+        return $this->excel->download(new HotelsExport(), 'hotels.xlsx');
+    }
+
+    public function import(Request $request, Excel $excel)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls', // Ensure the uploaded file is of type .xlsx or .xls
+        ]);
+
+        // Retrieve the uploaded file from the request
+        $file = $request->file('file');
+
+        // Import data from the uploaded file using the RoomTypesImport class
+        $excel->import(new RoomTypesImport, $file);
+
+        // Redirect back with success message
+        return redirect()->route('admin.roomType.index')->with('success', 'Data imported successfully.');
+    }
     public function index(Request $request)
     {
         if(!check_permission('Room Type List')){

@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('rt/import', [RoomTypeController::class, 'import'])->name('room_type.import');
 Route::get('rt/export', [RoomTypeController::class, 'export_xl'])->name('room_type.export');
+Route::get('hotel/export', [RoomTypeController::class, 'hotel_export_xl'])->name('hotel.export');
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirectToDashboard');
 
 Route::group(['as' => 'frontend.',], function () {

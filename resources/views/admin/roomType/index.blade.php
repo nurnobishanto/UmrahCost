@@ -11,12 +11,15 @@
             <div class="panel-heading">
                 <h5 class="panel-title">Room Type List & Price</h5>
 {{--                <a href="{{ route('admin.roomType.create') }}" class="panel-item">+ Add Room Type</a>--}}
-                <a type="button" class="panel-item" href="{{route('room_type.export')}}">
-                    Export
-                </a>
-                <a type="button" class="panel-item" data-bs-toggle="modal" data-bs-target="#roomTypeModal">
-                    + Add Room Type
-                </a>
+                <a type="button" class="panel-item" href="{{route('room_type.export')}}">Room Type Export</a>
+                <a type="button" class="panel-item" href="{{route('hotel.export')}}">Hotel Export</a>
+                <form action="{{ route('room_type.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input class="panel-item"  type="file" name="file" accept=".xlsx, .xls">
+                    <button type="submit" class="panel-item" >Upload</button>
+                </form>
+                <a type="button" class="panel-item" data-bs-toggle="modal" data-bs-target="#roomTypeModal">+ Add Room Type</a>
+
             </div>
             <div class="panel-body">
                 <form id="table-search-form" action="{{ route('admin.roomType.index') }}" method="GET"
