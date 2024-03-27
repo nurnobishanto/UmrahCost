@@ -44,13 +44,13 @@ Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth', '
     Route::group(['prefix' => 'clientFeedback/', 'as' => 'clientFeedback.'], function () {
         Route::post('status-change', [ClientFeedbackController::class, 'statusChange'])->name('status.change');
     });
-    
+
     // for query About
     Route::resource('queryAbout', QueryAboutController::class);
     Route::group(['prefix' => 'queryAbout/', 'as' => 'queryAbout.'], function () {
         Route::post('status-change', [QueryAboutController::class, 'statusChange'])->name('status.change');
     });
-    
+
     // for status
     Route::resource('status', StatusController::class);
     Route::group(['prefix' => 'status/', 'as' => 'status.'], function () {
@@ -91,7 +91,7 @@ Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth', '
     Route::group(['prefix' => 'location/', 'as' => 'location.'], function () {
         Route::post('status-change', [LocationController::class, 'statusChange'])->name('status.change');
     });
-    
+
     // for Sightseeing
     Route::resource('sightseeing', SightseeingController::class);
     Route::group(['prefix' => 'sightseeing/', 'as' => 'sightseeing.'], function () {
@@ -103,7 +103,7 @@ Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth', '
     Route::group(['prefix' => 'transport/', 'as' => 'transport.'], function () {
         Route::post('status-change', [TransportController::class, 'statusChange'])->name('status.change');
     });
-    
+
     // for Guide
     Route::resource('guide', GuideController::class);
     Route::group(['prefix' => 'guide/', 'as' => 'guide.'], function () {
@@ -135,14 +135,14 @@ Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth', '
         Route::get('package-create/{client_id}', [ClientController::class, 'packageCreate'])->name('package.create');
         Route::post('package-store/{client_id}', [ClientController::class, 'packageStore'])->name('package.store');
     });
-    
+
     // for customPackage
     Route::resource('customPackage', CustomPackageController::class);
     Route::group(['prefix' => 'customPackage/', 'as' => 'customPackage.'], function () {
         Route::get('send-invoice-to-user/{id}', [CustomPackageController::class, 'sendInvoiceToUser'])->name('sendInvoiceToUser');
         Route::get('change-status/{id}/{status_id}', [CustomPackageController::class, 'changeStatus'])->name('changeStatus');
     });
-    
+
     // for serviceVoucher
     Route::resource('serviceVoucher', ServiceVoucherController::class);
     Route::group(['prefix' => 'service-voucher/', 'as' => 'serviceVoucher.'], function () {
@@ -166,5 +166,8 @@ Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth', '
     Route::group(['prefix' => 'setting/', 'as' => 'setting.'], function () {
         Route::get('information', [SettingContgroller::class, 'information'])->name('information');
         Route::post('information-update', [SettingContgroller::class, 'informationUpdate'])->name('informationUpdate');
+        //sms
+        Route::get('sms', [SettingContgroller::class, 'sms'])->name('sms');
+        Route::post('sms-update', [SettingContgroller::class, 'smsUpdate'])->name('smsUpdate');
     });
 });

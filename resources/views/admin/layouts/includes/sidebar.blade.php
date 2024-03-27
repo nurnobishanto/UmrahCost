@@ -13,7 +13,7 @@
     <ul class="sidebar-menu">
         <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : null }}"><i class="fas fa-columns nav-icon"></i><span>Dashboard</span></a>
         </li>
-        
+
         @if (check_permission('Client Source List') || check_permission('Client Feedback List') || check_permission('Query About List') || check_permission('Client Status List') || check_permission('Status List'))
             <li class="has-menu">
                 <a href="#" class="has-children {{ Request::is('admin/clientSource*') ? ' active' : (Request::is('admin/queryAbout*') ? ' active' : (Request::is('admin/clientStatus*') ? ' active' : (Request::is('admin/status*') ? ' active' : null))) }}">
@@ -77,7 +77,7 @@
                     @if (check_permission('Room Type List'))
                         <li class="menu-name {{ request()->routeIs('admin.roomType.index') ? ' active' : null }}">
                             <a href="{{ route('admin.roomType.index') }}">Room Type List</a>
-                        </li> 
+                        </li>
                     @endif
                     @if (check_permission('Airline List'))
                         <li class="menu-name {{ request()->routeIs('admin.airline.index') ? ' active' : null }}">
@@ -160,7 +160,7 @@
                 </ul>
             </li>
         @endif
-        
+
         @if (check_permission('Service Voucher Setting List') || check_permission('Service Voucher Setting Create') || check_permission('Service Voucher List'))
             <li class="has-menu">
                 <a href="#" class="has-children {{ Request::is('admin/serviceVoucher*') ? ' active' : null }}">
@@ -172,11 +172,11 @@
                             <a href="{{ route('admin.serviceVoucher.index') }}">Service Voucher List</a>
                         </li>
                     @endif
-                    
+
                     @if (check_permission('Service Voucher Setting List') || check_permission('Service Voucher Setting Create'))
                         <li class="menu-name {{ request()->routeIs('admin.serviceVoucherSetting.index') ? ' active' : null }}">
                             <a href="{{ route('admin.serviceVoucherSetting.index') }}">Service Voucher Setting</a>
-                        </li>                        
+                        </li>
                     @endif
                 </ul>
             </li>
@@ -190,7 +190,10 @@
                 <ul class="sub-menu">
                     <li class="menu-name {{ request()->routeIs('admin.setting.information') ? ' active' : null }}">
                         <a href="{{ route('admin.setting.information') }}">Information</a>
-                    </li>               
+                    </li>
+                    <li class="menu-name {{ request()->routeIs('admin.setting.sms') ? ' active' : null }}">
+                        <a href="{{ route('admin.setting.sms') }}">SMS Setting</a>
+                    </li>
                 </ul>
             </li>
         @endif

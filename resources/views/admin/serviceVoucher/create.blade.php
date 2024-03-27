@@ -29,7 +29,7 @@
                                 <div class="col-5">
                                     <fieldset class="ams-input">
                                         <label for="client">Select Client<sup class="required">*</sup></label>
-                                        <select name="client" id="client" class="form-control select2" required>
+                                        <select name="client" id="client" class="form-control select2 select-search" required>
                                             <option value="">Select One</option>
                                             @foreach ($clients as $client)
                                                 <option @if ($client->id == old('client')) selected @endif
@@ -66,7 +66,7 @@
                                                 <label for="company_title{{ $key }}">Company Title:<sup
                                                         class="required">*</sup> </label>
                                                 <input type="text" value="{{ $companyTitle }}" name="company_title[]"
-                                                    id="company_title{{ $key }}" placeholder="Enter Company Title"
+                                                    id="company_title{{ $key }}"  placeholder="Enter Company Title"
                                                     required>
                                             </fieldset>
                                         </div>
@@ -96,15 +96,44 @@
                                     <div class="col-5">
                                         <fieldset class="ams-input">
                                             <label for="guest_name0">Guest Name:<sup class="required">*</sup> </label>
-                                            <input type="text" value="" name="guest_name[]" id="guest_name0"
+                                            <input type="text" value="{{old('guest_name.0')}}" name="guest_name[]" id="guest_name0"
                                                 placeholder="Enter Guest Name" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-5">
                                         <fieldset class="ams-input">
                                             <label for="passport_no0">Passport No:<sup class="required">*</sup> </label>
-                                            <input type="text" value="" name="passport_no[]" id="passport_no0"
+                                            <input type="text" value="{{old('passport_no.0')}}" name="passport_no[]" id="passport_no0"
                                                 placeholder="Enter Passport No" required>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-2 my-auto">
+                                    </div>
+                                    <div class="col-5">
+                                        <fieldset class="ams-input input-verticle">
+                                            <img src="{{ asset(get_static_option('logo') ?? 'assets/no_image.jpg') }}" id="visha_review"
+                                                 alt="Preview Banner" width="150" height="150" />
+
+                                            <label for="guest_visha">Guest Visha<sup class="required">*</sup></label>
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="guest_visha" id="guest_visha"
+                                                   onchange="document.getElementById('visha_review').src = window.URL.createObjectURL(this.files[0])">
+                                            @error('guest_visha')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-5">
+                                        <fieldset class="ams-input input-verticle">
+                                            <img src="{{ asset(get_static_option('logo') ?? 'assets/no_image.jpg') }}" id="passport_review"
+                                                 alt="Preview Banner" width="150" height="150" />
+
+                                            <label for="guest_passport">Guest Visha<sup class="required">*</sup></label>
+                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="guest_passport" id="guest_passport"
+                                                   onchange="document.getElementById('passport_review').src = window.URL.createObjectURL(this.files[0])">
+                                            @error('passport_review')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </fieldset>
                                     </div>
                                     <div class="col-2 my-auto">
@@ -142,7 +171,7 @@
                                             <fieldset class="ams-input">
                                                 <label for="date{{ $key }}">Date:<sup class="required">*</sup>
                                                 </label>
-                                                <input type="date" value="" name="date[]"
+                                                <input type="date" value="{{old('date.0')}}" name="date[]"
                                                     id="date{{ $key }}" placeholder="Enter Date" required>
                                             </fieldset>
                                         </div>
@@ -382,7 +411,7 @@
             });
             /* html */
 
-            let html = `            
+            let html = `
                         <div class="row">
                             <div class="col-5">
                                 <fieldset class="ams-input">
@@ -493,7 +522,7 @@
             });
             /* html */
 
-            let html = `            
+            let html = `
                         <div class="row">
                             <div class="col-4">
                                 <fieldset class="ams-input">
@@ -590,7 +619,7 @@
             });
             /* html */
 
-            let html = `           
+            let html = `
                         <div class="row">
                             <div class="col-4">
                                 <fieldset class="ams-input">
@@ -633,21 +662,21 @@
                                     <input type="text" value="" name="movement[]" id="movement${count}"
                                         placeholder="Movement" required>
                                 </fieldset>
-                            </div>  
+                            </div>
                             <div class="col-4">
                                 <fieldset class="ams-input">
                                     <label for="vehicle${count}">Vehicle:<sup class="required">*</sup> </label>
                                     <input type="text" value="" name="vehicle[]" id="vehicle${count}"
                                         placeholder="Vehicle" required>
                                 </fieldset>
-                            </div>  
+                            </div>
                             <div class="col-4">
                                 <fieldset class="ams-input">
                                     <label for="qty${count}">Qty:<sup class="required">*</sup> </label>
                                     <input type="text" value="" name="qty[]" id="qty${count}"
                                         placeholder="Qty" required>
                                 </fieldset>
-                            </div>  
+                            </div>
                             <div class="col-4">
                                 <fieldset class="ams-input">
                                     <label for="transport${count}">Transport:<sup class="required">*</sup> </label>

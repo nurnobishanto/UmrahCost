@@ -77,7 +77,7 @@ class ServiceVoucherController extends Controller
             abort(403);
         }
         $serviceVoucherSetting = ServiceVoucherSetting::firstOrCreate();
-        $clients = User::where('user_type', 'client')->select('id', 'name')->get();
+        $clients = User::where('user_type', 'client')->where('client_status_id',3)->select('id', 'name')->get();
 
         return view('admin.serviceVoucher.create', compact('clients', 'serviceVoucherSetting'));
     }
@@ -223,7 +223,7 @@ class ServiceVoucherController extends Controller
             'voucherTransportations'
         ])->findOrFail($id);
 
-        $clients = User::where('user_type', 'client')->select('id', 'name')->get();
+        $clients = User::where('user_type', 'client')->where('client_status_id',3)->select('id', 'name')->get();
 
         return view('admin.serviceVoucher.edit', compact('clients', 'serviceVoucher'));
     }
@@ -373,19 +373,19 @@ class ServiceVoucherController extends Controller
         //
     }
 
-    public function deleteElementById($type, $id, $voucher_id){        
+    public function deleteElementById($type, $id, $voucher_id){
         try {
-            
+
             if($type == 'company'){
                $voucherCompany = VoucherCompany::findOrFail($id);
-               $voucherCompany->delete();  
+               $voucherCompany->delete();
             }else if($type == 'guest'){
                $voucherGuest = VoucherGuest::findOrFail($id);
                $voucherGuest->delete();
             }else if($type == 'accommodation'){
                $voucherAccommodation = VoucherAccommodation::findOrFail($id);
                $voucherAccommodation->delete();
-            
+
             }else if($type == 'transport_details'){
                $voucherTransportation = VoucherTransportation::findOrFail($id);
                $voucherTransportation->delete();
@@ -394,7 +394,7 @@ class ServiceVoucherController extends Controller
                $removeOldFlightDetail->delete();
             }else{
                 $serviceVoucher = ServiceVoucher::find($voucher_id);
-                
+
                 $helpline_locations = $serviceVoucher->helpline_location ? json_decode($serviceVoucher->helpline_location, true) : [];
                 $helpline_numbers = $serviceVoucher->helpline_number ? json_decode($serviceVoucher->helpline_number, true) : [];
                 if (array_key_exists($id, $helpline_locations)) {
@@ -412,12 +412,12 @@ class ServiceVoucherController extends Controller
 
             return response()->json([
                 'message' => 'Deleted Successfully !',
-                'status' => 200,  
+                'status' => 200,
             ],200);
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Whoops Something went wrong !'.$exception->getMessage(),
-                'status' => 500,  
+                'status' => 500,
             ],500);
         }
     }

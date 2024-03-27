@@ -5,6 +5,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RoleHasPermission;
 use App\Models\StaticOption;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 
 if (!function_exists('random_code')) {
@@ -60,7 +61,7 @@ if (!function_exists('random_code')) {
             return Carbon::parse($date_time)->format('d/m/Y');
         return '';
     }
-    
+
     function common_full_month_date_format($date_time)
     {
         if ($date_time)
@@ -82,7 +83,7 @@ if (!function_exists('random_code')) {
         $dateRange = [$form, $to];
         return $dateRange;
     }
-    
+
     function this_year_date_range()
     {
         $form   = Carbon::now()->startOfYear()->format('Y-m-d');
@@ -186,11 +187,11 @@ if (!function_exists('random_code')) {
         $clientStatuses = ClientStatus::where('status',1)->get();
         return $clientStatuses;
     }
-    
+
     function one_to_ten_array(){
         return range(1, 10);
     }
-    
+
     function number_range_to_array($one, $two){
         return range($one, $two);
     }
@@ -213,13 +214,13 @@ if (!function_exists('random_code')) {
         // $response = curl_exec($ch);
         // curl_close($ch);
         // return $response;
-        
+
         $number = preg_replace('#[ -]+#', '', $number);
         $number = preg_replace('#[=]+#', '', $number);
         if(strlen($number)==10 || strlen($number)==13){
-            $number = "0".$number; 
+            $number = "0".$number;
         }
-        
+
         $message = str_replace("<br>","\n",$message);
         $message = str_replace(" ","+",$message);
         $message = strip_tags($message);
@@ -236,15 +237,15 @@ if (!function_exists('random_code')) {
         $url = "http://mimsms.com.bd/smsAPI?sendsms&apikey=$apiKey&apitoken=$apiToken&type=sms&from=$senderID&to=$to&text=$text&scheduledate=$scheduleDate&route=$route";
         $response = file_get_contents($url);
         return $response;
-        
-        
+
+
     }
-    
+
     function currency_convertion($amount, $conversion_rate){
         $inAmount = $amount*$conversion_rate;
         return common_number_format($inAmount);
     }
-    
+
     function common_number_format($number)
     {
         if ($number){
@@ -277,4 +278,88 @@ if (!function_exists('random_code')) {
             return false;
         }
     }
+
+    function number_validation($number) {
+
+        $number = str_replace(' ', '', $number);
+        $number = str_replace('-', '', $number);
+
+        if (preg_match('/^(\+880|880|0)?1(1|3|4|5|6|7|8|9)\d{8}$/', $number) == 1) {
+
+            if (preg_match("/^\+88/", $number) == 1) {
+                $number = str_replace('+', '', $number);
+            }
+            if (preg_match("/^880|^0/", $number) == 0) {
+                $number = "880" . $number;
+            }
+            if (preg_match("/^88/", $number) == 0) {
+                $number = "88" . $number;
+            }
+
+            return $number;
+        } else {
+            return false;
+        }
+    }
+
+    function bulksmsbd_sms_send($phone_number,$msg) {
+
+        $url = "http://bulksmsbd.net/api/smsapi";
+        $api_key = get_static_option('bulksmsbd_api');
+        $senderid = get_static_option('bulksmsbd_sender_id');
+        $number = number_validation($phone_number);
+        $message = trim($msg);
+
+        $data = [
+            "api_key" => $api_key,
+            "senderid" => $senderid,
+            "number" => $number,
+            "message" => $message
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+
+        $data = json_decode($response);
+        if($data->response_code == 202){
+            Toastr::success($data->success_message, 'Success', ["positionClass" => "toast-top-right", "timeOut" => "2500"]);
+        }else{
+            Toastr::error($data->error_message, 'Error', ["positionClass" => "toast-top-center", "timeOut" => "2500"]);
+
+        }
+    }
+    function get_balance_bulksmsbd() {
+        if(get_static_option('bulksmsbd_api')){
+            $url = "http://bulksmsbd.net/api/getBalanceApi";
+            $api_key = get_static_option('bulksmsbd_api');
+            $data = [
+                "api_key" => $api_key
+            ];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $data = json_decode($response);
+            if($data->response_code == 202){
+                return $data->balance;
+            }else{
+                return $data->error_message;
+            }
+        }
+        else{
+            return 'Enter api key to know balance';
+        }
+
+    }
+
 }

@@ -41,7 +41,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Client Source Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Client Feedback';
         $permissionGroup->save();
@@ -55,7 +55,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Client Feedback Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Query About';
         $permissionGroup->save();
@@ -69,7 +69,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Query About Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Client Status';
         $permissionGroup->save();
@@ -83,7 +83,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Client Status Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Status';
         $permissionGroup->save();
@@ -97,7 +97,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Status Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Currency';
         $permissionGroup->save();
@@ -111,7 +111,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Currency Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Package';
         $permissionGroup->save();
@@ -125,7 +125,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Package Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Package Type';
         $permissionGroup->save();
@@ -139,7 +139,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Package Type Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Hotel';
         $permissionGroup->save();
@@ -181,7 +181,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Airline Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Location';
         $permissionGroup->save();
@@ -195,7 +195,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Location Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Transport';
         $permissionGroup->save();
@@ -209,7 +209,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Transport Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Guide';
         $permissionGroup->save();
@@ -223,7 +223,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Guide Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Sightseeing';
         $permissionGroup->save();
@@ -237,7 +237,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Sightseeing Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Client';
         $permissionGroup->save();
@@ -267,7 +267,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'CRM Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Custom Package';
         $permissionGroup->save();
@@ -295,7 +295,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Service Voucher Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Service Voucher Setting';
         $permissionGroup->save();
@@ -309,7 +309,7 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Service Voucher Setting Delete', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Role Permission';
         $permissionGroup->save();
@@ -317,11 +317,13 @@ class PermissionSeeder extends Seeder
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
         $permission = Permission::create(['name' => 'Role Permission Assign', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
-        
+
         $permissionGroup = new PermissionGroup();
         $permissionGroup->name = 'Setting';
         $permissionGroup->save();
         $permission = Permission::create(['name' => 'Application Information Update', 'permission_group_id' => $permissionGroup->id]);
+        $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
+        $permission = Permission::create(['name' => 'SMS Setting', 'permission_group_id' => $permissionGroup->id]);
         $roleHasPermission = RoleHasPermission::create(['role_id' =>1,'permission_id'=> $permission->id]);
     }
 }
