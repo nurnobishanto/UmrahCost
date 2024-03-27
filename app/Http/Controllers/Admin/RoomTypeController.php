@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\RoomTypesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use App\Models\Location;
@@ -9,11 +10,17 @@ use App\Models\PackageType;
 use App\Models\RoomType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use Brian2694\Toastr\Facades\Toastr;
 
 class RoomTypeController extends Controller
 {
+    public function export_xl()
+    {
+        return 1;
+        //return Excel::download(new RoomTypesExport, 'room_types.xlsx');
+    }
     public function index(Request $request)
     {
         if(!check_permission('Room Type List')){
