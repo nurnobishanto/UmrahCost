@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -148,19 +149,15 @@ class ServiceVoucherController extends Controller
                     // Process guest visha image
                     if ($request->hasFile('guest_visha.'.$key) && $request->file('guest_visha.'.$key)->isValid()) {
                         $imageVisha = $request->file('guest_visha.'.$key);
-                        $folder_path = public_path('uploads/images/service/');
                         $visha_image_new_name = Str::random(10) . '-' . time() . '.' . $imageVisha->getClientOriginalExtension();
-                        Image::make($imageVisha->getRealPath())->save(public_path($folder_path . $visha_image_new_name));
-                        $voucherGuest->visha = $folder_path . $visha_image_new_name;
+                        $voucherGuest->visha = $imageVisha->storeAs('images/service', $visha_image_new_name, 'public');
                     }
 
                     // Process guest passport image
                     if ($request->hasFile('guest_passport.'.$key) && $request->file('guest_passport.'.$key)->isValid()) {
                         $imagePassport = $request->file('guest_passport.'.$key);
-                        $folder_path = public_path('uploads/images/service/');
                         $passport_image_new_name = Str::random(10) . '-' . time() . '.' . $imagePassport->getClientOriginalExtension();
-                        Image::make($imagePassport->getRealPath())->save(public_path($folder_path . $passport_image_new_name));
-                        $voucherGuest->passport = $folder_path . $passport_image_new_name;
+                        $voucherGuest->passport = $imagePassport->storeAs('images/service', $passport_image_new_name, 'public');
                     }
                     $voucherGuest->save();
                 }
@@ -317,6 +314,37 @@ class ServiceVoucherController extends Controller
                     $voucherGuest->service_voucher_id = $serviceVoucher->id;
                     $voucherGuest->name = $guest_name;
                     $voucherGuest->passport_no = $request->passport_no[$key] ? $request->passport_no[$key] : null;
+
+
+                    // Process guest visha image
+                    if ($request->hasFile('guest_visha.'.$key) && $request->file('guest_visha.'.$key)->isValid()) {
+                        $imageVisha = $request->file('guest_visha.'.$key);
+                        $visha_image_new_name = Str::random(10) . '-' . time() . '.' . $imageVisha->getClientOriginalExtension();
+                        $oldVishaImage = $voucherGuest->visha; // Get old visha image path
+
+                        // Store new image
+                        $voucherGuest->visha = $imageVisha->storeAs('images/service', $visha_image_new_name, 'public');
+
+                        // Delete old image
+                        if ($oldVishaImage) {
+                            Storage::disk('public')->delete($oldVishaImage);
+                        }
+                    }
+
+                    // Process guest passport image
+                    if ($request->hasFile('guest_passport.'.$key) && $request->file('guest_passport.'.$key)->isValid()) {
+                        $imagePassport = $request->file('guest_passport.'.$key);
+                        $passport_image_new_name = Str::random(10) . '-' . time() . '.' . $imagePassport->getClientOriginalExtension();
+                        $oldPassportImage = $voucherGuest->passport; // Get old passport image path
+
+                        // Store new image
+                        $voucherGuest->passport = $imagePassport->storeAs('images/service', $passport_image_new_name, 'public');
+
+                        // Delete old image
+                        if ($oldPassportImage) {
+                            Storage::disk('public')->delete($oldPassportImage);
+                        }
+                    }
                     $voucherGuest->save();
                 }
             }

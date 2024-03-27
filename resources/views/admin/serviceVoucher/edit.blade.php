@@ -107,6 +107,34 @@
                                                     id="passport_no{{ $key }}" placeholder="Enter Passport No" required>
                                             </fieldset>
                                         </div>
+                                        <div class="col-5">
+                                            <fieldset class="ams-input input-verticle">
+                                                <img src="{{ asset('uploads/'.$voucherGuest->visha ?? 'assets/no_image.jpg') }}" id="visha_review"
+                                                     alt="Preview Banner" width="150" height="150" />
+
+                                                <label for="guest_visha">Guest Visha<sup class="required">*</sup></label>
+                                                <input type="file" accept="image/png, image/jpeg, image/jpg" name="guest_visha[]" id="guest_visha"
+                                                       onchange="document.getElementById('visha_review').src = window.URL.createObjectURL(this.files[0])">
+                                                @error('guest_vish.0a')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-5">
+                                            <fieldset class="ams-input input-verticle">
+                                                <img src="{{ asset('uploads/'.$voucherGuest->passport?? 'assets/no_image.jpg') }}" id="passport_review"
+                                                     alt="Preview Banner" width="150" height="150" />
+
+                                                <label for="guest_passport">Guest Visha<sup class="required">*</sup></label>
+                                                <input type="file" accept="image/png, image/jpeg, image/jpg" name="guest_passport[]" id="guest_passport"
+                                                       onchange="document.getElementById('passport_review').src = window.URL.createObjectURL(this.files[0])">
+                                                @error('passport_review.0')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-2 my-auto">
+                                        </div>
                                         <div class="col-2 my-auto">
                                             @if($key != 0)
                                                 <button onclick="removeOldGuest($(this))" value="{{ $voucherGuest->id }}" type="button" class="btn btn-danger"
@@ -579,7 +607,7 @@
             });
             /* html */
 
-            let html = `            
+            let html = `
                         <div class="row">
                             <div class="col-5">
                                 <fieldset class="ams-input">
@@ -714,7 +742,7 @@
             });
             /* html */
 
-            let html = `            
+            let html = `
                         <div class="row">
                             <div class="col-4">
                                 <fieldset class="ams-input">
@@ -823,7 +851,7 @@
             });
             /* html */
 
-            let html = `           
+            let html = `
                         <div class="row">
                             <div class="col-4">
                                 <fieldset class="ams-input">
@@ -866,21 +894,21 @@
                                     <input type="text" value="" name="movement[]" id="movement${count}"
                                         placeholder="Movement" required>
                                 </fieldset>
-                            </div>  
+                            </div>
                             <div class="col-4">
                                 <fieldset class="ams-input">
                                     <label for="vehicle${count}">Vehicle:<sup class="required">*</sup> </label>
                                     <input type="text" value="" name="vehicle[]" id="vehicle${count}"
                                         placeholder="Vehicle" required>
                                 </fieldset>
-                            </div>  
+                            </div>
                             <div class="col-4">
                                 <fieldset class="ams-input">
                                     <label for="qty${count}">Qty:<sup class="required">*</sup> </label>
                                     <input type="text" value="" name="qty[]" id="qty${count}"
                                         placeholder="Qty" required>
                                 </fieldset>
-                            </div>  
+                            </div>
                             <div class="col-4">
                                 <fieldset class="ams-input">
                                     <label for="transport${count}">Transport:<sup class="required">*</sup> </label>
