@@ -317,13 +317,21 @@
     $(".sign-up-link").on("click",function(e){
         e.preventDefault();
         $(".sign-in-content").css("display","none");
+        $(".forget-content").css("display","none")
         $(".sign-up-content").css("display","block")
     })
 
     $(".sign-in-link").on("click",function(e){
         e.preventDefault();
         $(".sign-up-content").css("display","none");
+        $(".forget-content").css("display","none")
         $(".sign-in-content").css("display","block")
+    })
+    $(".forget-link").on("click",function(e){
+        e.preventDefault();
+        $(".sign-up-content").css("display","none");
+        $(".sign-in-content").css("display","none")
+        $(".forget-content").css("display","block")
     })
 
     // Password Type Toggle

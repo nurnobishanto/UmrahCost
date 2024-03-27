@@ -3427,6 +3427,12 @@ ul.psnger-meta-info li{
     max-height: 100%;
     overflow: auto;
 }
+.modal-content.forget-content{
+    display: none;
+    max-width: 800px;
+    max-height: 100%;
+    overflow: auto;
+}
 
 .modal-head{
     display: flex;

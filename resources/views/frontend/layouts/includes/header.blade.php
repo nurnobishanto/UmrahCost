@@ -39,7 +39,7 @@
                 @auth
                     <a href="javascript:void(0)" class="sign-btn logout-btn">Logout</a>
                 @else
-                    <a target="_blank" href="{{ route('login') }}" class="sign-btn">Sign In</a> 
+                    <a  href="{{ route('login') }}" class="sign-btn">Sign In</a>
                 @endauth
             </div>
         </div>

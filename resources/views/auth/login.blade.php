@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @push('title')
-    Created Packages
+    Login or Signup
 @endpush
 @push('style')
 @endpush
@@ -14,6 +14,11 @@
                     <img class="img-fluid"  src="{{ asset('assets/frontend/images/login-photo.png') }}" alt="Booking">
                 </div>
                 <div class="col-md-6">
+                    @if (session('status'))
+                        <div class="mb-4 font-medium text-sm text-green-600">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                     <div class="sign-modal-wpr">
                         <div class="sign-in-content modal-content">
 
@@ -50,7 +55,7 @@
                                     </fieldset>
                                     <div class="remember-pass">
                                         <label for="terms"><input type="checkbox" id="terms"> Remember me</label>
-                                        <a href="#">Forget Password</a>
+                                        <a href="#" class="forget-link">Forget Password</a>
                                     </div>
                                     <button class="trv-btn sign-btn">Sign In</button>
                                 </form>
@@ -70,7 +75,7 @@
                             </div>
                         </div>
                         <div class="sign-up-content modal-content">
-                      
+
                             <div class="modal-head">
                                 <h4 class="mb-0">Sign Up</h4>
                                 <!-- <span class="modal-close"><i class="icofont-close-line"></i></span> -->
@@ -154,6 +159,43 @@
                                     </div>
                                     <button class="trv-btn sign-btn">Sign Up</button>
                                 </form>
+                                <p class="new-acc">Already have an account? <a href="#" class="sign-in-link">Login</a></p>
+                            </div>
+                        </div>
+                        <div class="forget-content modal-content">
+
+                            <div class="modal-head">
+
+                                <h4 class="mb-0 ">Forget Password</h4>
+                                <!-- <span class="modal-close"><i class="icofont-close-line"></i></span> -->
+                            </div>
+                            <div class="modal-body">
+                                <form class="info-form" action="{{ route('password.email') }}" method="POST">
+                                    @csrf
+                                    <fieldset class="input-grp">
+                                        <label for="email" class="required">Email Address</label>
+                                        <div class="inputWithIcon">
+                                            <input name="email" type="email" placeholder="Enter Email Address" id="email">
+                                            <i class="icofont-envelope"></i>
+                                        </div>
+                                        @error('email')
+                                        <p class="text-danger alert-margin">{{ $message }}</p>
+                                        @enderror
+                                    </fieldset>
+
+                                    <button class="trv-btn sign-btn">{{ __('Email Password Reset Link') }}</button>
+                                </form>
+                                {{--                            <img src="{{ asset('assets/frontend/images/icons/sign-with.png') }}" alt="Sign With" class="w-100">--}}
+                                {{--                            <div class="social-login">--}}
+                                {{--                                <a href="#" class="social-link" target="_blank" aria-label="facebook">--}}
+                                {{--                                    <img src="{{ asset('assets/frontend/images/icons/facebook.png') }}" alt="Facebook">--}}
+                                {{--                                    <p>Facebook</p>--}}
+                                {{--                                </a>--}}
+                                {{--                                <a href="#" class="social-link" target="_blank" aria-label="google">--}}
+                                {{--                                    <img src="{{ asset('assets/frontend/images/icons/google.png') }}" alt="Google">--}}
+                                {{--                                    <p>Google</p>--}}
+                                {{--                                </a>--}}
+                                {{--                            </div>--}}
                                 <p class="new-acc">Already have an account? <a href="#" class="sign-in-link">Login</a></p>
                             </div>
                         </div>
