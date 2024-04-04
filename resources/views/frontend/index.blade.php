@@ -7,61 +7,10 @@
 @section('content')
     <main class="trv-main-content">
         @auth
-            @if(auth()->user()->otp_verified)
-            <div class="text-center">
+        <div class="text-center">
             <h6>Dear {{ auth()->user()->name }}</h6>
             <h5>Welcome to your dashboard !</h5>
         </div>
-            <div class="container">
-                <h2 class="mb-2">Created Packages</h2>
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">#SL</th>
-                            <th scope="col">Package</th>
-                            <th scope="col">Package Type</th>
-                            <th scope="col">Travel Date (Tentative)</th>
-                            <th scope="col">Traveler</th>
-                            <th scope="col">Created at</th>
-                            <th scope="col">Invoice</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($packages as $customPackage)
-                            <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $customPackage?->packageType?->package?->name }}</td>
-                                <td>{{ $customPackage?->packageType?->name }}</td>
-                                <td>{{ common_date_format($customPackage?->from_travel_date) }} - {{ common_date_format($customPackage?->travel_date) }}</td>
-                                <td>{{ $customPackage?->nos_of_traveler }}</td>
-                                <td>{{ common_date_time_format($customPackage?->created_at) }}</td>
-                                <td>
-                                    <a class="btn btn-primary" target="_blank" href="{{ route('invoice.customerInvoice', encrypt($customPackage->id)) }}">Invoice</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            @else
-                <div class="container">
-                    <h2 class="my-2 my-md-5">Please Verify your profile using otp</h2>
-                    <form class="{{route('user_otp_verify')}}" action="post" method="post">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="input-group mb-3 border">
-                                    <input type="text" name="otp" class="form-control" placeholder="Enter otp" aria-label="Enter otp" aria-describedby="basic-addon2" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="submit">Verify</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            @endif
-            <br>
         @else
             @include('frontend.layouts.partials.banner')
             @include('frontend.layouts.partials.container')

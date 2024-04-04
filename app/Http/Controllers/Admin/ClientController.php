@@ -140,7 +140,7 @@ class ClientController extends Controller
         try {
             $user->save();
 
-            $url = 'https://zamzam.amarsolution.com/login';
+            $url = env('APP_URL');
             $subject = 'Your Credentials of Zamzam Travels';
             Mail::to($user?->email)->send(new SentCredentialAfterCreateUserMail($url, $subject, $user, $password));
             $msgBody = 'জমজম ট্রাভেলস এ আপনার অ্যাকাউন্ট তৈরি করা হয়েছে।';
