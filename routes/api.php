@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('optimize',function (){
+    \Illuminate\Support\Facades\Artisan::call('migrate');
+    print_r(\Illuminate\Support\Facades\Artisan::output());
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    print_r(\Illuminate\Support\Facades\Artisan::output());
+});
 Route::group(['prefix' => 'v1/'], function () {
     // authentication related api
     Route::post('register', [RegsiterController::class, 'register']);
@@ -32,7 +37,7 @@ Route::group(['prefix' => 'v1/'], function () {
         Route::post('/reset-password', [App\Http\Controllers\Api\UserController::class, 'resetPassword']);
         Route::get('/user', [App\Http\Controllers\Api\UserController::class, 'userInfo']);
         Route::post('/profile-update', [App\Http\Controllers\Api\UserController::class, 'profileUpdate']);
-        Route::post('/parmanently-delete-account', [App\Http\Controllers\Api\UserController::class, 'parmanentlyDeleteAccount']);       
+        Route::post('/parmanently-delete-account', [App\Http\Controllers\Api\UserController::class, 'parmanentlyDeleteAccount']);
 
         // client related api
         Route::group(['prefix' => 'custom-package/'], function () {
