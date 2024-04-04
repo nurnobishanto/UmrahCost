@@ -1,34 +1,59 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+@extends('frontend.layouts.app')
+@push('title')
+    Forget Password
+@endpush
+@push('style')
+@endpush
+@section('content')
+    <main class="trv-main-content" >
+        <!-- Sign Modal -->
+        <div class="container">
+            <div class="row align-items-center">
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                <div class="col-md-6 ">
+                    <img class="img-fluid"  src="{{ asset('assets/frontend/images/login-photo.png') }}" alt="Booking">
+                </div>
+                <div class="col-md-6">
+                    @if (session('status'))
+                        <div class="mb-4 font-medium text-sm text-green-600">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    <div class="sign-modal-wpr">
+
+                        <div class="modal-content">
+
+                            <div class="modal-head">
+
+                                <h4 class="mb-0 ">Forget Password</h4>
+                                <!-- <span class="modal-close"><i class="icofont-close-line"></i></span> -->
+                            </div>
+                            <div class="modal-body">
+                                <form class="info-form" action="{{ route('web.resetPassword') }}" method="POST">
+                                    @csrf
+                                    <fieldset class="input-grp">
+                                        <label for="email_or_phone" class="required">Email Address / Phone Number</label>
+                                        <div class="inputWithIcon">
+                                            <input name="email_or_phone" type="text" placeholder="Enter Email Or Phone" id="email">
+                                            <i class="icofont-envelope"></i>
+                                        </div>
+                                        @error('email_or_phone')
+                                        <p class="text-danger alert-margin">{{ $message }}</p>
+                                        @enderror
+                                    </fieldset>
+                                    <button class="trv-btn sign-btn">Forgot Password</button>
+                                </form>
+                                <p class="new-acc">Already have an account? <a href="{{route('web.login')}}" >Login</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
 
-        <x-jet-validation-errors class="mb-4" />
+    </main>
+@endsection
+@push('script')
+@endpush
 
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>

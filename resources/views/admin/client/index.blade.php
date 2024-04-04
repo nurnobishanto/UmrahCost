@@ -12,7 +12,7 @@
             <div class="panel-heading">
                 <h5 class="panel-title"> Client List</h5>
                 @if (check_permission('Client Create'))
-                    <a href="{{ route('admin.client.create') }}" class="panel-item">+ Add New Client</a>    
+                    <a href="{{ route('admin.client.create') }}" class="panel-item">+ Add New Client</a>
                 @endif
             </div>
             <div class="panel-body">
@@ -150,12 +150,28 @@
                 $("#table-search-form").submit();
             });
 
-            $('#table_search').on('keyup paste', function() {
+            // $('#table_search').on('keyup paste', function() {
+            //     clearTimeout(keyupTimer);
+            //     keyupTimer = setTimeout(function() {
+            //         $("#table-search-form").submit();
+            //     }, wait);
+            // });
+            $('#table_search').on('keyup paste', function(event) {
                 clearTimeout(keyupTimer);
-                keyupTimer = setTimeout(function() {
-                    $("#table-search-form").submit();
-                }, wait);
+                if (event.keyCode === 13) { // Check if Enter key is pressed
+                    // Perform search here
+                    performSearch();
+                } else {
+                    keyupTimer = setTimeout(function() {
+                        performSearch();
+                    }, wait);
+                }
             });
+
+            function performSearch() {
+                // Your search logic here
+                $("#table-search-form").submit();
+            }
         });
 
         function exportData(type){

@@ -7,7 +7,8 @@
 @section('content')
     <main class="trv-main-content">
         @auth
-        <div class="text-center">
+            @if(auth()->user()->otp_verified)
+            <div class="text-center">
             <h6>Dear {{ auth()->user()->name }}</h6>
             <h5>Welcome to your dashboard !</h5>
         </div>
@@ -42,6 +43,24 @@
                     </tbody>
                 </table>
             </div>
+            @else
+                <div class="container">
+                    <h2 class="my-2 my-md-5">Please Verify your profile using otp</h2>
+                    <form class="{{route('user_otp_verify')}}" action="post" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group mb-3 border">
+                                    <input type="text" name="otp" class="form-control" placeholder="Enter otp" aria-label="Enter otp" aria-describedby="basic-addon2" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="submit">Verify</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            @endif
             <br>
         @else
             @include('frontend.layouts.partials.banner')

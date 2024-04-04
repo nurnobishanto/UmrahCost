@@ -11,7 +11,7 @@
 
     @yield('content')
     @if (Auth::check())
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('web.logout') }}" method="POST" style="display: none;">
             @csrf
             @method('POST')
         </form>

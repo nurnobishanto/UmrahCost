@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @push('title')
-     Signup
+     Change Password
 @endpush
 @push('style')
 @endpush
@@ -20,60 +20,41 @@
                         </div>
                     @endif
                     <div class="sign-modal-wpr">
-                        <div class=" modal-content" style="max-width: 100%">
+                        <div class=" modal-content" >
                             <div class="modal-head">
-                                <h4 class="mb-0">Sign Up</h4>
+                                <h4 class="mb-0">Create New Password</h4>
                                 <!-- <span class="modal-close"><i class="icofont-close-line"></i></span> -->
                             </div>
                             <div class="modal-body">
-                                <form class="info-form" action="{{ route('web.register') }}" method="POST">
+                                <form class="info-form" action="{{ route('web.verify_otp_change_pass') }}" method="POST">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <fieldset class="input-grp">
-                                                <label for="first_name" class="required">First Name</label>
-                                                <div class="inputWithIcon">
-                                                    <input type="text" placeholder="Enter First Name" id="first_name" name="first_name">
-                                                    <i class="icofont-envelope"></i>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <fieldset class="input-grp">
-                                                <label for="last_name" class="required">Last Name</label>
-                                                <div class="inputWithIcon">
-                                                    <input type="text" placeholder="Enter Last Name" id="last_name" name="last_name">
-                                                    <i class="icofont-envelope"></i>
-                                                </div>
-                                                @error('last_name')
-                                                <p class="text-danger alert-margin">{{ $message }}</p>
-                                                @enderror
-                                            </fieldset>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <fieldset class="input-grp">
-                                                <label for="email" class="required">Email Address</label>
-                                                <div class="inputWithIcon">
-                                                    <input type="email" placeholder="Enter Email Address" id="email" name="email">
-                                                    <i class="icofont-envelope"></i>
-                                                </div>
-                                                @error('email')
-                                                <p class="text-danger alert-margin">{{ $message }}</p>
-                                                @enderror
-                                            </fieldset>
-                                        </div>
-                                        <div class="col-sm-6">
 
+                                        <div class="col-sm-12">
                                             <fieldset class="input-grp">
-                                                <label for="phone" class="required">Contact Number</label>
-                                                <input name="phone" type="number" placeholder="" id="phone" class="phone" wire:model.defer="phone">
-                                                @error('phone')
+                                                <label for="email_or_phone" class="required">Email Address / Phone Number</label>
+                                                <div class="inputWithIcon">
+                                                    <input type="text" readonly required value="{{$value}}" placeholder="Enter Email Or Phone" id="email_or_phone" name="email_or_phone">
+                                                    <i class="icofont-envelope"></i>
+                                                </div>
+                                                @error('email_or_phone')
                                                 <p class="text-danger alert-margin">{{ $message }}</p>
                                                 @enderror
                                             </fieldset>
                                         </div>
-
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <fieldset class="input-grp">
+                                                <label for="otp" class="required">OTP</label>
+                                                <div class="inputWithIcon">
+                                                    <input type="text" placeholder="Enter OTP" id="otp" name="otp">
+                                                    <i class="icofont-envelope"></i>
+                                                </div>
+                                                @error('otp')
+                                                <p class="text-danger alert-margin">{{ $message }}</p>
+                                                @enderror
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-sm-12">
                                             <fieldset class="input-grp">
                                                 <label for="pass" class="required">Password</label>
                                                 <div class="inputWithIcon">
@@ -88,7 +69,7 @@
                                                 @enderror
                                             </fieldset>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <fieldset class="input-grp">
                                                 <label for="password_confirmation" class="required">Password</label>
                                                 <div class="inputWithIcon">
@@ -105,7 +86,7 @@
                                         </div>
 
                                     </div>
-                                    <button class="trv-btn sign-btn">Sign Up</button>
+                                    <button class="trv-btn sign-btn">Update Password</button>
                                 </form>
                                 <p class="new-acc">Already have an account? <a href="{{route('web.login_view')}}" class="">Login</a></p>
                             </div>

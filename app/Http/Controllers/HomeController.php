@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -17,5 +18,13 @@ class HomeController extends Controller
             Auth::logout();
             return redirect()->route('login')->with('warning', 'Whoops ! This portal is not for you .');
         }
+    }
+    public function user_otp_verify(Request $request){
+//        $request->validate([
+//            'otp' => 'required',
+//        ]);
+
+        toastr()->success('Your Account has been verified');
+        return redirect(route('redirectToDashboard'));
     }
 }

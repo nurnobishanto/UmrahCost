@@ -39,7 +39,7 @@
                 @auth
                     <a href="javascript:void(0)" class="sign-btn logout-btn">Logout</a>
                 @else
-                    <a  href="{{ route('login') }}" class="sign-btn">Sign In</a>
+                    <a  href="{{ route('web.login_view') }}" class="sign-btn">Sign In</a>
                 @endauth
             </div>
         </div>

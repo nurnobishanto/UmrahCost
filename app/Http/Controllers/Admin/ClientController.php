@@ -114,7 +114,7 @@ class ClientController extends Controller
         $user->address          = $request->address;
         $user->query_details    = $request->query_details;
         $user->notes            = $request->notes;
-        $user->number_of_person = $request->number_of_person ?? null;
+        $user->number_of_person = $request->number_of_person ?? 1;
         $user->tour_month       = $request->tour_month;
         $user->user_type        = 'client';
         $user->password         = Hash::make($password);
@@ -142,9 +142,9 @@ class ClientController extends Controller
 
             $url = 'https://zamzam.amarsolution.com/login';
             $subject = 'Your Credentials of Zamzam Travels';
-
             Mail::to($user?->email)->send(new SentCredentialAfterCreateUserMail($url, $subject, $user, $password));
-
+            $msgBody = 'জমজম ট্রাভেলস এ আপনার অ্যাকাউন্ট তৈরি করা হয়েছে।';
+            bulksmsbd_sms_send($user->phone,$msgBody);
             Toastr::success('Client added successfully !', 'Success', ["positionClass" => "toast-top-right","timeOut" => "2500"]);
             return back()->with('play_audio', true);
         } catch (\Exception $exception) {

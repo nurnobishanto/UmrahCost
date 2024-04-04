@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Frontend\CreatedPackageController;
 use App\Http\Controllers\Frontend\CustomPackageController;
 use App\Http\Controllers\Frontend\LandingPageController;
@@ -23,6 +24,24 @@ Route::post('rt/import', [RoomTypeController::class, 'import'])->name('room_type
 Route::get('rt/export', [RoomTypeController::class, 'export_xl'])->name('room_type.export');
 Route::get('hotel/export', [RoomTypeController::class, 'hotel_export_xl'])->name('hotel.export');
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirectToDashboard');
+Route::post('user-otp-verify', [HomeController::class, 'user_otp_verify'])->name('user_otp_verify');
+
+Route::get('login', [AuthController::class,'login_view'])->name('web.login_view');
+Route::post('login', [AuthController::class,'login'])->name('web.login');
+Route::get('register', [AuthController::class,'register_view'])->name('web.register_view');
+Route::post('register', [AuthController::class,'register'])->name('web.register');
+Route::get('otp-verify', [AuthController::class,'register_verify'])->name('web.register_verify');
+Route::get('resend-otp', [AuthController::class,'resend_otp'])->name('web.resend_otp');
+Route::post('otp-verify', [AuthController::class,'verifyOtp'])->name('web.verifyOtp');
+Route::post('logout', [AuthController::class,'logout'])->name('web.logout');
+Route::get('password-reset', [AuthController::class,'resetPasswordView'])->name('web.resetPasswordView');
+Route::post('password/reset', [AuthController::class,'resetPassword'])->name('web.resetPassword');
+Route::get('password/change', [AuthController::class,'passwordChange'])->name('web.passwordChange');
+Route::post('verify-otp-change-pass', [AuthController::class,'verify_otp_change_pass'])->name('web.verify_otp_change_pass');
+
+
+
+
 
 Route::group(['as' => 'frontend.',], function () {
     Route::get('/', [LandingPageController::class, 'index'])->name('index');
