@@ -33,9 +33,7 @@
             align-items: center;
         }
 
-        .inv-heading .inv-col {
-            border: 1px solid black
-        }
+
 
         .inv-heading .inv-col div:first-child {
             background-color: #217a03;
@@ -45,7 +43,7 @@
         }
 
         .inv-heading .inv-col .title {
-            font-size: 32px;
+            font-size: 25px;
             font-weight: 700;
         }
 
@@ -69,6 +67,7 @@
             text-align: center;
             font-weight: 700;
             font-size: 15px;
+            line-height: 35px;
         }
 
         .inv-table {
@@ -79,9 +78,9 @@
 
         .inv-table td,
         .inv-table th {
-            padding: 4px;
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
+            text-align: center;
+            padding: 0px 5px;
+            border: 1px solid black;
             font-size: 12px;
         }
 
@@ -91,12 +90,6 @@
             font-size: 12px
         }
 
-        .inv-terms .title {
-            background: #217a03;
-            font-size: 14px;
-            padding: 2px !important;
-            color: white;
-        }
 
         .inv-vehicle-time .title {
             text-decoration: underline;
@@ -251,21 +244,32 @@
             <div class="invoice">
                 <div class="inv-heading text-center">
                     <div class="inv-col">
-                        <div class="">Program #</div>
-                        <div>{{ $serviceVoucher->serial_no }}</div>
+                        <img height="100px" src="{{ asset(get_static_option('logo') ?? 'loginasset/img/logo.png') }}" alt="Logo">
                     </div>
                     <div class="inv-col">
-                        <h3 class="title">
-                            Service Voucher
-                        </h3>
-                        <p class="sub-title">
-                            [Umrah Season {{ Carbon\Carbon::parse($serviceVoucher->created_at)->format('Y') }}]
-                        </p>
+                        <span style="background-color: #B26008; border-radius: 10px;padding: 5px 10px; color: white">
+                            Umrah Season {{ Carbon\Carbon::parse($serviceVoucher->created_at)->format('Y') }}
+                        </span>
+                        <h5 class="title" style="margin: 15px 0 0">
+                            <span style="background-color: #007A00; border-radius: 10px;padding: 1px 10px; color: white">Service Voucher</span>
+                        </h5>
+                    </div>
+                    <div class="inv-col">
+                        <table class="inv-table">
+                            <thead style="background-color: #00730D;">
+                            <tr>
+                                <td style="color: white">Group ID</td>
+                                <td style="color: white">File No (BD)</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ $serviceVoucher->serial_no }}</td>
+                                <td>{{ $serviceVoucher->serial_no }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                    </div>
-                    <div class="inv-col">
-                        <div>Pilgrim By</div>
-                        <div>Ref:</div>
                     </div>
                 </div>
 
@@ -281,15 +285,15 @@
                 @php
                     $totalGuest = $serviceVoucher->voucherGuests->count();
                     $half = ceil($totalGuest / 2);
-                    
+
                     // dd($totalGuest,$half);
-                    
+
                 @endphp
                 <div class="inv-table-container">
                     <h5 class="inv-table-title">Guest contract & accepted/confirmed itinerary</h5>
                     @if ($totalGuest <= 5)
                         <table class="inv-table">
-                            <thead>
+                            <thead style="background-color: #92D050">
                                 <tr>
                                     <th>Sl</th>
                                     <th>Guest/s Name</th>
@@ -360,7 +364,7 @@
                 <div class="inv-table-container">
                     <h5 class="inv-table-title">Accommodation Details</h5>
                     <table class="inv-table">
-                        <thead>
+                        <thead style="background-color: #FABF8F">
                             <tr>
                                 <th>City</th>
                                 <th>Hotel</th>
@@ -397,7 +401,7 @@
                 <div class="inv-table-container">
                     <h5 class="inv-table-title">Transportation Details</h5>
                     <table class="inv-table">
-                        <thead>
+                        <thead style="background-color: #E5B8B7">
                             <tr>
                                 <th>Date</th>
                                 <th>From</th>
@@ -432,7 +436,7 @@
                 <div class="inv-table-container">
                     <h5 class="inv-table-title">Flight Details</h5>
                     <table class="inv-table">
-                        <thead>
+                        <thead style="background-color: #B2A1C7">
                             <tr>
                                 <th>Date</th>
                                 <th>Carrier</th>
@@ -461,8 +465,8 @@
 
                 {{-- Terms and conditions  --}}
                 <div class="inv-terms">
-                    <h3 class="title">Terms & Conditions : HOTEL CHECK-IN & CHECK-OUT TIMINGS :</h3>
-                    <div>{!! $serviceVoucher->terms_and_conditions !!}</div>    
+                    <h4 class="title">Terms & Conditions :</h4>
+                    <div>{!! $serviceVoucher->terms_and_conditions !!}</div>
                 </div>
 
                 {{-- Guest Helpline  --}}
@@ -473,22 +477,37 @@
                     @endphp
                     <h3 class="title">Guest Helpline:</h3>
                     <div class="row">
-                        @foreach ($helpline_locations as $key => $helpline_location)
-                            <div class="text-center col-6" style="border: 1px solid black; padding: 5px; font-size: 12px;">{{ $helpline_location }} - {{ $helpline_numbers[$key] }}</div>     
-                        @endforeach
-                    {{-- </div>
-                    <div class="row"> --}}
-                        <div class="col-6" style="border: 1px solid black; padding: 5px; font-size: 12px;">
+                        <table class="inv-table">
+                            @php $hln = 0; $hlnCount = 0; @endphp
+                            @foreach($helpline_locations as $helpline_location)
+                                @php $hlnCount++; @endphp
+                            @endforeach
+                            @while ($hln < $hlnCount)
+                                <tr>
+                                    <td>{{ $helpline_locations[$hln] }} - {{ $helpline_numbers[$hln] }}</td>
+                                    @if(isset($helpline_numbers[$hln + 1]) && isset($helpline_locations[$hln + 1]))
+                                        <td>{{ $helpline_locations[$hln + 1] }} - {{ $helpline_numbers[$hln + 1] }}</td>
+                                        @php $hln++; @endphp
+                                    @endif
+                                </tr>
+                                @php $hln++; @endphp
+                            @endwhile
+
+                        </table>
+                     </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-6" >
                             <h3 class="title">Service Included :</h3>
-                            <div>{!! $serviceVoucher->service_included !!}</div>    
+                            <div style="border: 1px solid black;padding: 5px">{!! $serviceVoucher->service_included !!}</div>
                         </div>
-                        <div class="col-6" style="border: 1px solid black; padding: 5px; font-size: 12px;">
+                        <div class="col-6" >
                             <div class="text-center">
                                 <h3 class="title">Service Excluded:</h3>
-                                <div>{!! $serviceVoucher->service_excluded !!}</div>    
+                                <div style="border: 1px solid black;padding: 5px">{!! $serviceVoucher->service_excluded !!}</div>
+                                <div style="border: 1px solid black;padding: 5px;margin-top: 10px">{!! $serviceVoucher->support_staf !!}</div>
                             </div>
                         </div>
-                        <div class="text-center col-6" style="border: 1px solid black; padding: 5px; font-size: 12px;">{!! $serviceVoucher->support_staf !!}</div>     
+
                     </div>
                 </div>
             </div>

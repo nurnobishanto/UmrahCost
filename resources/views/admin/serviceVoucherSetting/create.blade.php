@@ -28,7 +28,7 @@
                                 $companyNames = $serviceVoucherSetting->company_name ? json_decode($serviceVoucherSetting->company_name) : [];
                             @endphp
 
-                            <div id="companies"> 
+                            <div id="companies">
                                 @foreach ($companyTitles as $key => $companyTitle)
                                     <div class="row">
                                         <div class="col-5">
@@ -181,6 +181,7 @@
                                         @enderror
                                     </fieldset>
                                 </div>
+
                             </div>
                         </div>
                         <fieldset class="text-end">
@@ -192,7 +193,7 @@
         </div>
     </div>
 @endsection
-@push('script')  
+@push('script')
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -236,10 +237,10 @@
         }
         function removeOldCompany(element){
             let content_id = $(element).val();
-            
+
             console.log('DELETE_SERVICE_VOUCHER_ELEMENT',DELETE_SERVICE_VOUCHER_ELEMENT)
             $.get(DELETE_SERVICE_VOUCHER_ELEMENT.replace("#", content_id).replace('type','company'),function(res) {
-                
+
                 if(res.status == 200){
                     removeCompany(element)
                 }else{
