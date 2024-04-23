@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth', 'webAdmin']], function () {
 
+    Route::get('/', [DashboardController::class, 'index'])->name('admin');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('change/password', [ProfileController::class, 'changePassword'])->name('changePassword');
     Route::post('change/password/update', [ProfileController::class, 'changePasswordUpdate'])->name('changePassword.update');
