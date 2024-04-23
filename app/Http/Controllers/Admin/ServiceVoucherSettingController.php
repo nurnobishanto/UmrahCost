@@ -53,7 +53,7 @@ class ServiceVoucherSettingController extends Controller
 
             'company_title' => 'nullable|array',
             'company_name' => 'nullable|array',
-            
+
             'helpline_location' => 'nullable|array',
             'helpline_number' => 'nullable|array',
 
@@ -69,19 +69,20 @@ class ServiceVoucherSettingController extends Controller
             DB::beginTransaction();
 
             $serviceVoucherSetting = ServiceVoucherSetting::firstOrCreate();
-        
+
             $serviceVoucherSetting->update([
                 'service_included' => $request->service_included,
                 'service_excluded' => $request->service_excluded,
                 'support_staf' => $request->support_staf,
                 'terms_and_conditions' => $request->terms_and_conditions,
-            
+                'office_address' => $request->office_address,
+
                 'company_title' => $request->company_title ? json_encode($request->company_title) : [],
                 'company_name' => $request->company_name ? json_encode($request->company_name) : [],
-                
+
                 'helpline_location' => $request->helpline_location ? json_encode($request->helpline_location) : [],
                 'helpline_number' => $request->helpline_number ? json_encode($request->helpline_number) : [],
-                
+
                 'career' => $request->career ? json_encode($request->career) : [],
                 'flight_no' => $request->flight_no ? json_encode($request->flight_no) : [],
                 'from' => $request->from ? json_encode($request->from) : [],
@@ -97,7 +98,7 @@ class ServiceVoucherSettingController extends Controller
             DB::rollback();
             Toastr::error('Whoops .Something went wrong!' . $exception->getMessage(), 'Error', ["positionClass" => "toast-top-center","timeOut" => "2500"]);
         }
-        
+
         return back();
     }
 
@@ -147,10 +148,10 @@ class ServiceVoucherSettingController extends Controller
     }
 
 
-    public function deleteElementByKey($type, $key){        
+    public function deleteElementByKey($type, $key){
         try {
             $serviceVoucherSetting = ServiceVoucherSetting::firstOrCreate();
-            
+
             if($type == 'company'){
                 $company_titles = $serviceVoucherSetting->company_title ? json_decode($serviceVoucherSetting->company_title, true) : [];
                 $company_names = $serviceVoucherSetting->company_name ? json_decode($serviceVoucherSetting->company_name, true) : [];
@@ -173,19 +174,19 @@ class ServiceVoucherSettingController extends Controller
 
                 if (array_key_exists($key, $careers)) {
                     unset($careers[$key]);
-                }  
+                }
                 if (array_key_exists($key, $flight_nos)) {
                     unset($flight_nos[$key]);
-                }  
+                }
                 if (array_key_exists($key, $froms)) {
                     unset($froms[$key]);
-                }  
+                }
                 if (array_key_exists($key, $tos)) {
                     unset($tos[$key]);
-                }  
+                }
                 if (array_key_exists($key, $etds)) {
                     unset($etds[$key]);
-                }  
+                }
                 if (array_key_exists($key, $etas)) {
                     unset($etas[$key]);
                 }
@@ -213,12 +214,12 @@ class ServiceVoucherSettingController extends Controller
 
             return response()->json([
                 'message' => 'Deleted Successfully !',
-                'status' => 200,  
+                'status' => 200,
             ],200);
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => 'Whoops Something went wrong !'.$exception->getMessage(),
-                'status' => 500,  
+                'status' => 500,
             ],500);
         }
     }

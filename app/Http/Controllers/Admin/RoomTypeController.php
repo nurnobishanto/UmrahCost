@@ -34,9 +34,10 @@ class RoomTypeController extends Controller
     {
         return $this->excel->download(new RoomTypeExport(), 'room_types.xlsx');
     }
-    public function hotel_export_xl()
+    public function hotel_export_xl($id)
     {
-        return $this->excel->download(new HotelsExport(), 'hotels.xlsx');
+        $location = Location::find($id);
+        return $this->excel->download(new HotelsExport($id), $location->name.'_hotels.xlsx');
     }
 
     public function import(Request $request, Excel $excel)

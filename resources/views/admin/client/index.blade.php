@@ -69,6 +69,7 @@
                         <thead>
                             <tr>
                                 <th>SL</th>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -82,6 +83,7 @@
                             @foreach ($clients as $client)
                                 <tr>
                                     <td>{{ $clients->firstItem() + $loop->index }}</td>
+                                    <td>{{ $client->id??'' }}</td>
                                     <td>{{ $client->name ?? '' }}</td>
                                     <td>{{ $client->email ?? '' }}</td>
                                     <td>{{ $client->phone ?? '' }}</td>

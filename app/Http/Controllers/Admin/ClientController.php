@@ -49,7 +49,7 @@ class ClientController extends Controller
                         ->when($request->filled('client_status_id'), function ($query) use ($request) {
                             $query->where('client_status_id',$request->client_status_id);
                          })
-                        ->where('user_type', 'client')->orderBy('name', 'ASC')
+                        ->where('user_type', 'client')->orderBy('id', 'desc')
                         ->with(['customStatus','clientStatus','crm'])
                         ->paginate($show);
         $clientStatuses = ClientStatus::where('status',1)->get();

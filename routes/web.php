@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('rt/import', [RoomTypeController::class, 'import'])->name('room_type.import');
 Route::get('rt/export', [RoomTypeController::class, 'export_xl'])->name('room_type.export');
-Route::get('hotel/export', [RoomTypeController::class, 'hotel_export_xl'])->name('hotel.export');
+Route::get('hotel/export/{id}', [RoomTypeController::class, 'hotel_export_xl'])->name('hotel.export');
 Route::get('redirect-to-dashboard', [HomeController::class, 'redirectToDashboard'])->name('redirectToDashboard');
 Route::post('user-otp-verify', [HomeController::class, 'user_otp_verify'])->name('user_otp_verify');
 

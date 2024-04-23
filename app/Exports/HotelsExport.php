@@ -7,11 +7,21 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class HotelsExport implements FromCollection
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    protected $id;
+
+    public function __construct($id)
     {
-        return Hotel::select('id', 'name')->get();
+        $this->id = $id;
+    }
+    public function collection(): \Illuminate\Support\Collection
+    {
+        return Hotel::select('id', 'name')->where('location_id',$this->id)->get();
+    }
+    public function headings(): array
+    {
+        return [
+            'ID',
+            'Hotel Name',
+        ];
     }
 }

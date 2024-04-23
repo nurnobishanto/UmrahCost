@@ -858,6 +858,7 @@ class ComposerStaticInit41e2dd6b71f04e56bcc3b79f09c0e408
         'App\\Http\\Controllers\\Api\\OtherController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/OtherController.php',
         'App\\Http\\Controllers\\Api\\RegsiterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/RegsiterController.php',
         'App\\Http\\Controllers\\Api\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UserController.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Frontend\\CreatedPackageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/CreatedPackageController.php',
         'App\\Http\\Controllers\\Frontend\\CustomPackageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/CustomPackageController.php',

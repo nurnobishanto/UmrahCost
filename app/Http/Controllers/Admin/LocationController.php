@@ -42,6 +42,11 @@ class LocationController extends Controller
                     $actionHtml = '<div class="edit-icons">
                                         <div class ="action-buttons">
                                     ';
+
+
+                    $actionHtml .= ' <a href="' . route('hotel.export', $data->id) . '">
+                                            <i class="far fa-file-excel bg-warning"></i>
+                                        </a>';
                     if(check_permission('Location Edit')){
                         $actionHtml .= ' <a href="' . route('admin.location.edit', $data->id) . '">
                                             <i class="far fa-edit bg-info"></i>

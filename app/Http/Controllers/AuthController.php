@@ -65,7 +65,13 @@ class AuthController extends Controller
 
         // Attempt to authenticate the user
         if (Auth::attempt([$field => $request->email_or_phone, 'password' => $request->password])) {
+
+            if (Auth()->user()->user_type == 'admin'){
+                return redirect(route('admin.dashboard'));
+            }
+
             return redirect(route('frontend.index'));
+
         } else {
             // Authentication failed
             return back()->withInput()->withErrors(['email_or_phone' => 'Invalid credentials']);

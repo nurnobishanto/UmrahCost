@@ -100,6 +100,7 @@ class ServiceVoucherController extends Controller
 
         $validator = Validator::make($request->all(), [
             'client' => 'required',
+            'group_no' => 'required',
             'serial_no' => 'required',
             'guest_name.0' => 'required',
             'passport_no.0' => 'required',
@@ -118,11 +119,13 @@ class ServiceVoucherController extends Controller
             $serviceVoucher = new ServiceVoucher();
 
             $serviceVoucher->client_id = $request->client;
+            $serviceVoucher->group_no = $request->group_no;
             $serviceVoucher->serial_no = $request->serial_no;
             $serviceVoucher->service_included = $request->service_included;
             $serviceVoucher->service_excluded = $request->service_excluded;
             $serviceVoucher->support_staf = $request->support_staf;
             $serviceVoucher->terms_and_conditions = $request->terms_and_conditions;
+            $serviceVoucher->office_address = $request->office_address;
 
             $serviceVoucher->helpline_location = $request->helpline_location ? json_encode($request->helpline_location) : [];
             $serviceVoucher->helpline_number = $request->helpline_number ? json_encode($request->helpline_number) : [];
@@ -278,11 +281,13 @@ class ServiceVoucherController extends Controller
             $serviceVoucher = ServiceVoucher::findOrFail($id);
 
             $serviceVoucher->client_id = $request->client;
+            $serviceVoucher->group_no = $request->group_no;
             $serviceVoucher->serial_no = $request->serial_no;
             $serviceVoucher->service_included = $request->service_included;
             $serviceVoucher->service_excluded = $request->service_excluded;
             $serviceVoucher->support_staf = $request->support_staf;
             $serviceVoucher->terms_and_conditions = $request->terms_and_conditions;
+            $serviceVoucher->office_address = $request->office_address;
 
             $serviceVoucher->helpline_location = $request->helpline_location ? json_encode($request->helpline_location) : [];
             $serviceVoucher->helpline_number = $request->helpline_number ? json_encode($request->helpline_number) : [];

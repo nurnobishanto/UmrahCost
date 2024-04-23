@@ -13,7 +13,7 @@ class RoomTypeExport implements FromCollection,WithHeadings
     */
     public function collection(): \Illuminate\Support\Collection
     {
-        return RoomType::select('hotel_id','name','nos_of_traveler','cost_per_day','status','from_date','to_date')->get();
+        return RoomType::select('hotel_id','name','nos_of_traveler','cost_per_day','status','from_date','to_date')->take(5)->get();
     }
 
     public function headings(): array

@@ -42,14 +42,28 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-5">
-                                    <fieldset class="ams-input">
-                                        <label for="serial_no">Serial No<sup class="required">*</sup></label>
-                                        <input type="text" name="serial_no" value="{{ old('serial_no') }}"
-                                            class="form-control" required id="serial_no">
-                                        @error('serial_no')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </fieldset>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <fieldset class="ams-input">
+                                                <label for="group_no">Group No<sup class="required">*</sup></label>
+                                                <input type="text" name="group_no" value="{{ old('group_no') }}" placeholder="Enter group no"
+                                                       class="form-control" required id="group_no">
+                                                @error('group_no')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-6">
+                                            <fieldset class="ams-input">
+                                                <label for="serial_no">Serial No (File ID)<sup class="required">*</sup></label>
+                                                <input type="text" name="serial_no" value="{{ old('serial_no') }}" placeholder="Enter Serial no"
+                                                       class="form-control" required id="serial_no">
+                                                @error('serial_no')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </fieldset>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -309,6 +323,15 @@
                                         <textarea name="terms_and_conditions" id="terms_and_conditions" cols="30" class="ckeditor" rows="2">{!! old('terms_and_conditions', $serviceVoucherSetting->terms_and_conditions) !!}</textarea>
                                         @error('terms_and_conditions')
                                             <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </fieldset>
+                                </div>
+                                <div class="col-6">
+                                    <fieldset class="ams-input">
+                                        <label for="office_address">Office Address</label>
+                                        <textarea name="office_address" id="office_address" cols="30" class="ckeditor" rows="2">{!! old('office_address', $serviceVoucherSetting->office_address) !!}</textarea>
+                                        @error('office_address')
+                                        <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </fieldset>
                                 </div>

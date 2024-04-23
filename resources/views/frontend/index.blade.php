@@ -10,6 +10,9 @@
         <div class="text-center">
             <h6>Dear {{ auth()->user()->name }}</h6>
             <h5>Welcome to your dashboard !</h5>
+            @if(Auth()->user()->user_type == 'admin')
+                <a href="{{route('admin.dashboard')}}" class="btn btn-danger">Open Dashboard</a>
+            @endif
         </div>
         @else
             @include('frontend.layouts.partials.banner')

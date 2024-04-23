@@ -227,6 +227,8 @@
             #printPageButton {
                 display: none;
             }
+
+
         }
     </style>
 </head>
@@ -239,7 +241,7 @@
     </div>
 
 
-    <div style="margin-top: 50px;">
+    <div style="margin-top: 20px;">
         <section class="page" style="position: relative;">
             <div class="invoice">
                 <div class="inv-heading text-center">
@@ -264,7 +266,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>{{ $serviceVoucher->serial_no }}</td>
+                                <td>{{ $serviceVoucher->group_no }}</td>
                                 <td>{{ $serviceVoucher->serial_no }}</td>
                             </tr>
                             </tbody>
@@ -510,8 +512,14 @@
 
                     </div>
                 </div>
+
+            </div>
+            <div style="border-top: 1px solid black;margin-top: 20px;padding-top: 10px;color: black">
+                {!! $serviceVoucher->office_address !!}
             </div>
         </section>
+
+
     </div>
 </body>
 

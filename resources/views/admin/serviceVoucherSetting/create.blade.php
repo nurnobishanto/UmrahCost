@@ -181,6 +181,15 @@
                                         @enderror
                                     </fieldset>
                                 </div>
+                                <div class="col-6">
+                                    <fieldset class="ams-input">
+                                        <label for="office_address">Office Address</label>
+                                        <textarea name="office_address" id="office_address" cols="30" class="ckeditor" rows="2">{!! old('office_address', $serviceVoucherSetting->office_address) !!}</textarea>
+                                        @error('office_address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </fieldset>
+                                </div>
 
                             </div>
                         </div>

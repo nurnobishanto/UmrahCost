@@ -46,6 +46,7 @@ return array(
     'App\\Http\\Controllers\\Api\\OtherController' => $baseDir . '/app/Http/Controllers/Api/OtherController.php',
     'App\\Http\\Controllers\\Api\\RegsiterController' => $baseDir . '/app/Http/Controllers/Api/RegsiterController.php',
     'App\\Http\\Controllers\\Api\\UserController' => $baseDir . '/app/Http/Controllers/Api/UserController.php',
+    'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Frontend\\CreatedPackageController' => $baseDir . '/app/Http/Controllers/Frontend/CreatedPackageController.php',
     'App\\Http\\Controllers\\Frontend\\CustomPackageController' => $baseDir . '/app/Http/Controllers/Frontend/CustomPackageController.php',
